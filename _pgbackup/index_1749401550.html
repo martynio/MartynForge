@@ -17,7 +17,7 @@
     <body class="text-black-50"> 
         <header style="background-color: rgba(255, 255, 255, 0.6);" class="fixed-top"> 
             <div class="language-bar bg-white bg-opacity-75 border-bottom py-1 small">
-                <div class="container d-flex justify-content-end align-items-center"><span class="me-2 text-muted">Język:</span><a href="/" class="mx-1 text-decoration-none text-dark" title="Polski"> <img src="assets/flags/pl.svg" alt="Polski" width="20" height="14" style="vertical-align: middle;"> </a><a href="/en/" class="mx-1 text-decoration-none text-dark" title="English"> <img src="assets/flags/en.svg" alt="English" width="20" height="14" style="vertical-align: middle;"> </a><a href="/nl/" class="mx-1 text-decoration-none text-dark" title="Nederlands"> <img src="assets/flags/nl.svg" alt="Nederlands" width="20" height="14" style="vertical-align: middle;"> </a>
+                <div class="container d-flex justify-content-end align-items-center"><span class="me-2 text-muted">Język:</span><a href="/" class="mx-1 text-decoration-none text-dark" title="Polski"> <img src="assets/flags/pl.svg" alt="Polski" width="20" height="14" style="vertical-align: middle;"> </a><a href="/en/" class="mx-1 text-decoration-none text-dark" title="English"> <img src="assets/flags/gb.svg" alt="English" width="20" height="14" style="vertical-align: middle;"> </a><a href="/nl/" class="mx-1 text-decoration-none text-dark" title="Nederlands"> <img src="assets/flags/nl.svg" alt="Nederlands" width="20" height="14" style="vertical-align: middle;"> </a>
                 </div>
             </div>
             <nav class="border-bottom navbar navbar-expand-lg navbar-light pb-lg-0 pt-lg-0"> 
@@ -416,22 +416,5 @@ Whether you're starting from scratch or need a design refresh — we're here to 
             </div>             
         </footer>         
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script>
-  const langBar = document.querySelector('.language-bar');
-
-  window.addEventListener('scroll', function () {
-    if (!langBar) return;
-
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop === 0) {
-      // Tylko jeśli jesteśmy na samej górze
-      langBar.classList.remove('hide-on-scroll');
-    } else {
-      // Ukryj, jeśli scrollujesz w dół lub gdziekolwiek indziej
-      langBar.classList.add('hide-on-scroll');
-    }
-  });
-</script>
     </body>     
 </html>

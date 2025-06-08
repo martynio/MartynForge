@@ -4,12 +4,10 @@
 }
 
 /* Opcjonalnie: schowaj na małych ekranach */
-.language-bar {
-    transition: transform 0.3s ease;
-}
-
-.language-bar.hide-on-scroll {
-    transform: translateY(-100%);
+@media (max-width: 768px) {
+    .language-bar {
+        display: none;
+    }
 }
 
 /* Naprawa z-index Pinegrow/Bootstrap */
