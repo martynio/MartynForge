@@ -1,0 +1,18 @@
+/* Stylowanie paska językowego */
+.language-bar img {
+    vertical-align: middle;
+}
+
+/* Opcjonalnie: schowaj na małych ekranach */
+.language-bar {
+    transition: transform 0.3s ease;
+}
+
+.language-bar.hide-on-scroll {
+    transform: translateY(-100%);
+}
+
+/* Naprawa z-index Pinegrow/Bootstrap */
+header.fixed-top {
+    z-index: 1050;
+}
