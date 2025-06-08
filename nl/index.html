@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="MartynForge - Digitale studio voor webdesign en creatieve oplossingen." />
+    <meta name="author" content="MartynForge" />
+    <title>MartynForge | Digitaal Ontwerp & Webstudio</title>
+
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/blocks.css" rel="stylesheet" />
+    <link href="/style.css" rel="stylesheet" />
+  </head>
+  <body class="text-black-50">
+    <header class="fixed-top" style="background-color: rgba(255, 255, 255, 0.6);">
+      <div class="language-bar bg-white bg-opacity-75 border-bottom py-1 small">
+        <div class="container d-flex justify-content-end align-items-center">
+          <span class="me-2 text-muted">Taal:</span>
+          <a href="/" class="mx-1 text-decoration-none text-dark" title="Pools"><img src="/assets/flags/pl.svg" alt="Pools" width="20" height="14" style="vertical-align: middle;" /></a>
+          <a href="/en/" class="mx-1 text-decoration-none text-dark" title="Engels"><img src="/assets/flags/en.svg" alt="Engels" width="20" height="14" style="vertical-align: middle;" /></a>
+          <a href="/nl/" class="mx-1 text-decoration-none text-dark" title="Nederlands"><img src="/assets/flags/nl.svg" alt="Nederlands" width="20" height="14" style="vertical-align: middle;" /></a>
+        </div>
+      </div>
+      <nav class="border-bottom navbar navbar-expand-lg navbar-light pb-lg-0 pt-lg-0">
+        <div class="container">
+          <a class="fw-bold navbar-brand" href=".">MartynForge</a>
+          <ul class="align-items-lg-center flex-row ms-auto me-2 me-lg-0 navbar-nav order-lg-2"></ul>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown-3" aria-controls="navbarNavDropdown-3" aria-expanded="false" aria-label="Navigatie">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown-3">
+            <a class="nav-link px-lg-3 py-lg-4 text-dark" href="#Home">Home</a>
+            <a class="nav-link px-lg-3 py-lg-4 text-dark" href="#About">Over ons</a>
+            <a class="nav-link px-lg-3 py-lg-4 text-dark" href="#Services">Diensten</a>
+            <a class="nav-link px-lg-3 py-lg-4 text-dark" href="#Portfolio">Portfolio</a>
+            <a class="nav-link px-lg-3 py-lg-4 text-dark" href="#Help">Support</a>
+            <a class="nav-link px-lg-3 py-lg-4 text-dark" href="#Contact">Contact</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="Home" class="background-cover bg-dark pb-5 position-relative pt-5 text-white" style="background-image:url('/Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');">
+        <div class="container mt-5 pb-5 pt-5">
+          <div class="pb-5 pt-5 row">
+            <div class="col-lg-7 col-xl-6 col-xxl-5 pb-5 pt-5">
+              <h1 class="display-3 fw-normal">"Incepta tua — forma nostra."</h1>
+              <p class="lead mb-5">Jouw ideeën — onze vorm.</p>
+              <form>
+                <div class="gx-2 row">
+                  <div class="col-sm mb-3">
+                    <input type="text" class="form-control form-control-lg ps-4 pe-4 rounded-pill" placeholder="Waar ben je naar op zoek?" />
+                  </div>
+                  <div class="col-sm-auto mb-3 text-end">
+                    <button type="submit" class="btn btn-danger btn-lg pe-4 ps-4 rounded-pill">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="me-1">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617z" />
+                      </svg>
+                      <span class="align-middle">Zoeken</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ...reszta sekcji do przetłumaczenia, jeśli chcesz pełną wersję... -->
+    </main>
+
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      const langBar = document.querySelector('.language-bar');
+      window.addEventListener('scroll', function () {
+        if (!langBar) return;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop === 0) {
+          langBar.classList.remove('hide-on-scroll');
+        } else {
+          langBar.classList.add('hide-on-scroll');
+        }
+      });
+    </script>
+  </body>
+</html>
