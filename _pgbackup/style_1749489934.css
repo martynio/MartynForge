@@ -16,7 +16,3 @@
 header.fixed-top {
     z-index: 1050;
 }
-
-#aboutImage {
-    transition: opacity 0.6s ease-in-out;
-}
