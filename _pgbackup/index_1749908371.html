@@ -1,8 +1,8 @@
 <!DOCTYPE html> 
 <html lang="en"> 
-    <title>MartynForge | Digital Design & Web Studio</title>     
     <head> 
-        <meta charset="utf-8"> 
+        <meta charset="utf-8">
+        <title>MartynForge | Digital Design & Web Studio</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
         <meta name="description" content="Pinegrow Web Editor - Directory Bootstrap v5 Template"> 
@@ -17,11 +17,12 @@
     <body class="text-black-50"> 
         <header style="background-color: rgba(255, 255, 255, 0.6);" class="fixed-top"> 
             <div class="language-bar bg-white bg-opacity-75 border-bottom py-1 small">
-                <div class="container d-flex justify-content-end align-items-center"><span class="me-2 text-muted">Język:</span><a href="/" class="mx-1 text-decoration-none text-dark" title="Polski"> <img src="assets/flags/pl.svg" alt="Polski" width="20" height="14" style="vertical-align: middle;"> </a><a href="/en/" class="mx-1 text-decoration-none text-dark" title="English"> <img src="assets/flags/gb.svg" alt="English" width="20" height="14" style="vertical-align: middle;"> </a><a href="/nl/" class="mx-1 text-decoration-none text-dark" title="Nederlands"> <img src="assets/flags/nl.svg" alt="Nederlands" width="20" height="14" style="vertical-align: middle;"> </a>
+                <div class="container d-flex justify-content-end align-items-center"><span class="me-2 text-muted">Język:</span><a href="/" class="mx-1 text-decoration-none text-dark" title="Polski"> <img src="assets/flags/pl.svg" alt="Polski" width="20" height="14" style="vertical-align: middle;"> </a><a href="/en/" class="mx-1 text-decoration-none text-dark" title="English"> <img src="assets/flags/en.svg" alt="English" width="20" height="14" style="vertical-align: middle;"> </a><a href="/nl/" class="mx-1 text-decoration-none text-dark" title="Nederlands"> <img src="assets/flags/nl.svg" alt="Nederlands" width="20" height="14" style="vertical-align: middle;"> </a>
                 </div>
             </div>
             <nav class="border-bottom navbar navbar-expand-lg navbar-light pb-lg-0 pt-lg-0"> 
-                <div class="container"> <a class="fw-bold navbar-brand" href=".">MartynForge</a> 
+                <div class="container"> <a class="fw-bold navbar-brand d-flex align-items-center" href="."> <img src="assets/icons/logomartynforge.png" alt="Logo" style="height: 30px; width: auto; margin-right: 8px;"/>
+  MartynForge</a> 
                     <ul class="align-items-lg-center flex-row ms-auto me-2 me-lg-0 navbar-nav order-lg-2"> 
                         <li class="d-none d-sm-block nav-item"> 
 </li>                         
@@ -72,19 +73,19 @@
             </nav>             
         </header>         
         <main> 
-            <section id="Home" class="background-cover bg-dark  pb-5 position-relative pt-5 text-white" style="background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');"> 
+            <section id="Home" class="background-cover bg-dark  pb-5 position-relative pt-5 text-white" style="background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');"> 
                 <div class="container mt-5  pb-5 pt-5"> 
                     <div class="pb-5 pt-5 row"> 
                         <div class="col-lg-7 col-xl-6 col-xxl-5 pb-5 pt-5"> 
                             <h1 class="display-3 fw-normal ">&quot;Incepta tua &mdash; forma nostra.&quot;</h1> 
                             <p class="lead mb-5">Twoje pomysły &mdash; nasza forma.</p> 
-                            <form> 
+                            <form id="search-form"> 
                                 <div class="gx-2 row"> 
                                     <div class="col-sm mb-3"> 
                                         <input type="text" class="form-control form-control-lg ps-4 pe-4 rounded-pill" placeholder="What are you looking for?"> 
                                     </div>                                     
                                     <div class="col-sm-auto mb-3 text-end"> 
-                                        <button type="submit" class="btn btn-danger btn-lg pe-4 ps-4 rounded-pill"> 
+                                        <button type="submit" class="mf-btn mf-btn-primary" aria-label="Search" role="button">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="me-1"> 
                                                 <g> 
                                                     <path fill="none" d="M0 0h24v24H0z"></path>                                                     
@@ -94,7 +95,7 @@
                                         </button>                                         
                                     </div>                                     
                                 </div>                                 
-                            </form>                             
+                            </form>
                         </div>                         
                     </div>                     
                 </div>                 
@@ -120,35 +121,34 @@
             <section id="About" class="pb-5 pt-5"> 
                 <div class="container"> 
                     <div class="mb-4 text-center"> 
-                        <h2 class="text-dark">About us</h2> 
-                        <p>MartynForge is a fusion of digital craft and strategic creativity. We transform your ideas into powerful visual forms — built on precision, design, and modern web technologies.</p> 
+                        <h2 class="text-dark">O nas</h2> 
+                        <section id="about" class="bg-light text-dark py-5">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <!-- Obrazek -->
+                                    <div class="col-md-6 mb-4 mb-md-0 text-center">
+                                        <img id="aboutImage" src="assets/about/anvil1.png" alt="Kowadło MartynForge" class="img-fluid rounded shadow">
+                                    </div>
+                                    <!-- Tekst -->
+                                    <div class="col-md-6">
+                                        <h2 class="mb-4">Cyfrowa Kuźnia Idei</h2>
+                                        <p>
+          MartynForge to nie jest zwykłe studio graficzne. To miejsce, w którym iskra kreatywności uderza w stal technologii. 
+          Powstała z potrzeby tworzenia – świadomie, uczciwie, z pasją. Tutaj projekt to więcej niż produkt. To odlew myśli. </p>
+                                        <p>
+          Wierzymy, że nowoczesny świat potrzebuje starego rzemiosła: precyzji, znaczenia, celu. Dlatego łączymy sztukę wizualną, kod i sztuczną inteligencję z etycznym kompasem.
+          Nasze strony i logotypy nie tylko dobrze wyglądają – one opowiadają historie, budują tożsamość i służą ludziom. </p>
+                                        <p>
+          MartynForge to także platforma dla edukacji, wspólnoty i rozwoju. Działamy jak kuźnia: tu hartują się idee, rodzą się marki i inicjatywy, które coś znaczą. </p>
+                                        <p class="fw-bold text-secondary">
+          Tworzymy z sercem. Kodujemy z sensem. I walimy młotem, kiedy trzeba. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>                     
                     <div class="justify-content-center row"> 
-                        <div class="col-lg-4 col-md-6 pb-3 pt-3"> 
-                            <div class="border"> <a href="#" class="d-block"></a> 
-                            </div>                             
-                        </div>                         
-                        <div class="col-lg-4 col-md-6 pb-3 pt-3"> 
-                            <div class="border"> <a href="#" class="d-block"></a> 
-                            </div>                             
-                        </div>                         
-                        <div class="col-lg-4 col-md-6 pb-3 pt-3"> 
-                            <div class="border"> <a href="#" class="d-block"></a> 
-                            </div>                             
-                        </div>                         
-                        <div class="col-lg-4 col-md-6 pb-3 pt-3"> 
-                            <div class="border"> 
-</div>                             
-                        </div>                         
-                        <div class="col-lg-4 col-md-6 pb-3 pt-3"> 
-                            <div class="border"> <a href="#" class="d-block"></a> 
-                            </div>                             
-                        </div>                         
-                        <div class="col-lg-4 col-md-6 pb-3 pt-3"> 
-                            <div class="border"> <a href="#" class="d-block"></a> 
-                            </div>                             
-                        </div>                         
-                    </div>                     
+</div>                     
                 </div>                 
             </section>             
             <div class="container pb-4 pt-4"> 
@@ -199,7 +199,7 @@
                             <p class="fw-light">Get fresh design ideas, project updates, exclusive offers, and creative insights delivered straight to your inbox. No spam, just value.
 Join the forge. Create the future.</p> 
                         </div>                         
-                        <div class="col-lg-auto ms-auto"> <a class="btn btn-outline-light ps-4 pe-4 rounded-pill" href="#">Register Now</a> 
+                        <div class="col-lg-auto ms-auto"> <a class="mf-btn mf-btn-light" href="#" role="button" aria-label="Register for newsletter">Register Now</a> 
                         </div>                         
                     </div>                     
                 </div>                 
@@ -208,7 +208,7 @@ Join the forge. Create the future.</p>
                 <div class="container"> 
                     <div class="mb-4 text-center"> 
                         <h2 class="text-dark">Portfolio</h2> 
-                        <p class="text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit eiusmod</p> 
+                        <p class="text-secondary">Przegląd naszych realizacji — projekty, które mówią same za siebie.</p> 
                     </div>                     
                     <div class="justify-content-center row"> 
                         <div class="col-lg-4 col-md-6 py-3"> 
@@ -219,20 +219,11 @@ Join the forge. Create the future.</p>
                             </div>                             
                         </div>                         
                         <div class="col-lg-4 col-md-6 py-3"> 
-</div>                         
+                            <img src="Design/skorupex.png" class="bg-white img-fluid w-100" alt="Location image" width="320" height="400"/> 
+                        </div>                         
                         <div class="col-lg-4 col-md-6 py-3"> 
                             <div class="bg-dark position-relative text-white"> 
-                                <img src="https://images.unsplash.com/photo-1589088428702-3ea38a574498?ixid=MnwyMDkyMnwwfDF8cmFuZG9tfHx8fHx8fHx8MTYxNTI3NDk3OA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=320&h=400&fit=crop" class="img-fluid w-100" alt="Location image" width="320" height="400"> 
-                                <div class="bottom-0 end-0  pb-4 pe-4 position-absolute ps-4 start-0"> 
-                                    <h3 class="h5 mb-1">Kathmandu, Nepal</h3> 
-                                    <p>214+ listings</p><a class="btn btn-light pe-4 ps-3 rounded-pill" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="me-1"> 
-                                            <g> 
-                                                <path fill="none" d="M0 0h24v24H0z"/> 
-                                                <path d="M16 12l-6 6V6z"/> 
-                                            </g>                                             
-                                        </svg><span class="align-middle">Explore</span></a> 
-                                </div>                                 
-                            </div>                             
+</div>                             
                         </div>                         
                     </div>                     
                     <div class="pb-3 pt-3 text-center"><a class="btn btn-danger pe-4 ps-4 rounded-pill" href="#">View More</a> 
@@ -286,7 +277,7 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                     </div>                     
                 </div>                 
             </section>             
-            <section class="background-center-top background-cover bg-dark pb-5 pt-5 text-white-50" style="background-image:url('https://images.unsplash.com/photo-1543691379-f2f5b144d593?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMDkyMnwwfDF8c2VhcmNofDl8fG5pZ2h0JTIwbGlmZXxlbnwwfHx8&ixlib=rb-1.2.1&q=80&w=1080');"> 
+            <section class="background-left-center bg-dark pb-5 pt-5 text-white-50" style="background-image:url('Design/bartlo.png');"> 
                 <div class="container"> 
                     <div class="align-items-center justify-content-center row"> 
                         <div class="col-lg-3 col-sm-6 pb-3 pt-3"> 
@@ -296,7 +287,7 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                                     <path d="M7 9h10v2H7zm0 4h6v2H7z"/> 
                                 </svg>                                 
                                 <div> 
-                                    <h2 class="h4 mb-1 text-white">20+</h2> 
+                                    <h2 class="h4 mb-1 text-white">2+</h2> 
                                     <p class="mb-0">Completed Projects</p> 
                                 </div>                                 
                             </div>                             
@@ -318,7 +309,7 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                                     <path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4z"/> 
                                 </svg>                                 
                                 <div> 
-                                    <h2 class="h4 mb-1 text-white">3–5 days</h2> 
+                                    <h2 class="h4 mb-1 text-white">3–10 days</h2> 
                                     <p class="mb-0">Average Delivery Time</p> 
                                 </div>                                 
                             </div>                             
@@ -338,8 +329,6 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                 </div>                 
             </section>             
         </main>         
-        <script src="assets/js/popper.min.js"></script>         
-        <script src="bootstrap/js/bootstrap.min.js"></script>         
         <footer class="bg-dark pt-5 text-secondary"> 
             <div class="container"> 
                 <div class="row"> 
@@ -374,7 +363,7 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                                     </li>                                     
                                     <li class="mb-3"> <a href="#support" class="link-secondary text-decoration-none">Support</a> 
                                     </li>                                     
-                                    <li class="mb-3"> <a href="#privacy" class="link-secondary text-decoration-none">Privacy Policy</a> 
+                                    <li class="mb-3"> <a href="/privacy.html" class="link-secondary text-decoration-none">Privacy Policy</a> 
                                     </li>                                     
                                 </ul>                                 
                             </div>                             
@@ -384,7 +373,7 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                     <div class="col-lg-5 col-xl-4 py-3"> 
                         <h2 class="h5 mb-4 text-white">Subscribe</h2> 
                         <p class="mb-3">Join our newsletter for occasional updates, insights, and creative drops from the forge.</p> 
-                        <form class="mb-4"> 
+                        <form class="mb-4" action="newsletter"> 
                             <div class="bg-white border input-group overflow-hidden p-1 rounded-pill"> 
                                 <input type="email" class="border-0 form-control pe-3 ps-3" placeholder="Enter your email..." required> 
                                 <button class="btn btn-primary pb-2 pe-4 ps-4 pt-2 rounded-pill" type="submit" aria-label="Submit"> 
@@ -409,29 +398,14 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                         <div class="col-md pb-2 pt-2"> 
                             <p class="mb-0">&copy; 2025 MartynForge. All rights reserved.</p> 
                         </div>                         
-                        <div class="col-md-auto pb-2 pt-2"><a href="#privacy" class="link-secondary text-decoration-none">Privacy Policy</a> | <a href="#terms" class="link-secondary text-decoration-none">Terms of Use</a> 
+                        <div class="col-md-auto pb-2 pt-2"><a href="/privacy.html" class="link-secondary text-decoration-none">Privacy Policy</a> | <a href="/terms.html" class="link-secondary text-decoration-none">Terms of Use</a> 
                         </div>                         
                     </div>                     
                 </div>                 
             </div>             
         </footer>         
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script>
-  const langBar = document.querySelector('.language-bar');
-
-  window.addEventListener('scroll', function () {
-    if (!langBar) return;
-
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop === 0) {
-      // Tylko jeśli jesteśmy na samej górze
-      langBar.classList.remove('hide-on-scroll');
-    } else {
-      // Ukryj, jeśli scrollujesz w dół lub gdziekolwiek indziej
-      langBar.classList.add('hide-on-scroll');
-    }
-  });
-</script>
+        <script src="assets/js/popper.min.js"></script>         
+        <script src="bootstrap/js/bootstrap.min.js"></script>         
+        <script src="assets/js/main.js"></script>
     </body>     
 </html>

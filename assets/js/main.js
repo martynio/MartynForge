@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
     newsletterForm.addEventListener("submit", function (e) {
       e.preventDefault();
       const email = this.querySelector("input[type='email']").value.trim();
-      alert(email && email.includes("@")
-        ? "Dziękujemy! Dodano do newslettera: " + email
-        : "Podaj poprawny adres email.");
+     // alert(email && email.includes("@")
+      //  ? "Dziękujemy! Dodano do newslettera: " + email
+      //  : "Podaj poprawny adres email.");
     });
   }
 
@@ -61,3 +61,50 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+  /* === Animacja "wysłano" dla przycisku newslettera === */
+  const submitBtn = document.querySelector('.mf-btn-submit');
+  if (newsletterForm && submitBtn) {
+    newsletterForm.addEventListener('submit', function (e) {
+      e.preventDefault(); // nadpisuje alert z powyżej
+      const email = this.querySelector("input[type='email']").value.trim();
+      if (!email || !email.includes("@")) {
+        alert("Podaj poprawny adres email.");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = '✓ Sent';
+      submitBtn.style.backgroundColor = '#28a745';
+
+      setTimeout(() => {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+        submitBtn.style.backgroundColor = '';
+      }, 2000);
+    });
+  }
+
+  /* === Smooth scroll === */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  });
+
+  /* === Animacje kliknięcia dla mf-btn === */
+  document.querySelectorAll('.mf-btn').forEach(btn => {
+    btn.addEventListener('mousedown', () => {
+      btn.style.transform = 'scale(0.97)';
+    });
+    btn.addEventListener('mouseup', () => {
+      btn.style.transform = 'scale(1)';
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'scale(1)';
+    });
+  });
