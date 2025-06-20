@@ -139,57 +139,41 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-// === USŁUGI: interaktywne kafelki z rozwijaniem tylko jednego ===
+  // === USŁUGI: rozwijanie tylko jednego kafla ===
 const serviceCards = document.querySelectorAll('.service-card');
 
 serviceCards.forEach(card => {
+  const details = card.querySelector('.service-details');
+  if (!details) return;
+
+  // Reset style
+  details.classList.remove('visible');
+  details.style.maxHeight = '0';
+  details.style.opacity = '0';
+
   card.addEventListener('click', () => {
-    const isFocused = card.classList.contains('focused');
+    const isOpen = details.classList.contains('visible');
 
-    if (isFocused) {
-      // Jeśli już kliknięty, resetuj
-      resetCards();
-      return;
-    }
-
-    // Zanim reset – oznacz do aktywacji
-    card.classList.add('activating');
-
-    // Płynne przejście: reset + aktywacja z opóźnieniem
-    resetCards();
-
-    setTimeout(() => {
-      card.classList.add('focused', 'active');
-      card.parentElement.classList.add('focused');
-      serviceCards.forEach(c => {
-        if (c !== card) c.classList.add('dimmed');
-      });
-
-      const details = card.querySelector('.service-details');
-      if (details) {
-        details.style.maxHeight = details.scrollHeight + 'px';
-        details.style.opacity = '1';
+    // Zamknij wszystkie inne
+    serviceCards.forEach(c => {
+      const d = c.querySelector('.service-details');
+      if (d && d !== details) {
+        d.classList.remove('visible');
+        d.style.maxHeight = '0';
+        d.style.opacity = '0';
       }
+    });
 
-      // Scroll na środek
-      card.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-    }, 100); // ⏱️ opóźnienie 100ms = brak migania
+    // Toggle aktualny
+    if (!isOpen) {
+      details.classList.add('visible');
+      details.style.maxHeight = details.scrollHeight + 'px';
+      details.style.opacity = '1';
+    } else {
+      details.classList.remove('visible');
+      details.style.maxHeight = '0';
+      details.style.opacity = '0';
+    }
   });
 });
-
-function resetCards() {
-  serviceCards.forEach(c => {
-    c.classList.remove('focused', 'dimmed', 'active', 'activating');
-    const d = c.querySelector('.service-details');
-    if (d) {
-      d.style.maxHeight = '0';
-      d.style.opacity = '0';
-    }
-  });
-}
-
-
 });

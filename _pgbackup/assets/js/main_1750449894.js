@@ -146,19 +146,22 @@ serviceCards.forEach(card => {
   card.addEventListener('click', () => {
     const isFocused = card.classList.contains('focused');
 
-    if (isFocused) {
-      // Jeśli już kliknięty, resetuj
-      resetCards();
-      return;
-    }
+    // RESET WSZYSTKIEGO
+    serviceCards.forEach(c => {
+      c.classList.remove('focused', 'dimmed', 'active');
+      if (c.parentElement.classList.contains('focused')) {
+        c.parentElement.classList.remove('focused');
+      }
+      const d = c.querySelector('.service-details');
+      if (d) {
+        d.classList.remove('visible');
+        d.style.maxHeight = '0';
+        d.style.opacity = '0';
+      }
+    });
 
-    // Zanim reset – oznacz do aktywacji
-    card.classList.add('activating');
-
-    // Płynne przejście: reset + aktywacja z opóźnieniem
-    resetCards();
-
-    setTimeout(() => {
+    // AKTYWACJA JEŚLI NIE BYŁO FOCUSED
+    if (!isFocused) {
       card.classList.add('focused', 'active');
       card.parentElement.classList.add('focused');
       serviceCards.forEach(c => {
@@ -167,29 +170,13 @@ serviceCards.forEach(card => {
 
       const details = card.querySelector('.service-details');
       if (details) {
+        details.classList.add('visible');
         details.style.maxHeight = details.scrollHeight + 'px';
         details.style.opacity = '1';
       }
-
-      // Scroll na środek
-      card.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-    }, 100); // ⏱️ opóźnienie 100ms = brak migania
-  });
-});
-
-function resetCards() {
-  serviceCards.forEach(c => {
-    c.classList.remove('focused', 'dimmed', 'active', 'activating');
-    const d = c.querySelector('.service-details');
-    if (d) {
-      d.style.maxHeight = '0';
-      d.style.opacity = '0';
     }
   });
-}
+});
 
 
 });

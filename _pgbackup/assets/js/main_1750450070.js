@@ -145,51 +145,51 @@ const serviceCards = document.querySelectorAll('.service-card');
 serviceCards.forEach(card => {
   card.addEventListener('click', () => {
     const isFocused = card.classList.contains('focused');
+    const row = card.closest('.service-row');
 
-    if (isFocused) {
-      // Jeśli już kliknięty, resetuj
-      resetCards();
-      return;
+    // RESET wszystkiego
+    serviceCards.forEach(c => {
+      c.classList.remove('focused', 'dimmed', 'active');
+      const col = c.parentElement;
+      if (col.classList.contains('focused')) {
+        col.classList.remove('focused');
+      }
+      const d = c.querySelector('.service-details');
+      if (d) {
+        d.classList.remove('visible');
+        d.style.maxHeight = '0';
+        d.style.opacity = '0';
+      }
+    });
+
+    // Usuń klasę centrowania rzędu
+    if (row) {
+      row.classList.remove('center-focused');
     }
 
-    // Zanim reset – oznacz do aktywacji
-    card.classList.add('activating');
+    // Jeśli nie był kliknięty wcześniej – aktywuj
+    if (!isFocused) {
+      if (row) {
+        row.classList.add('center-focused');
+      }
 
-    // Płynne przejście: reset + aktywacja z opóźnieniem
-    resetCards();
-
-    setTimeout(() => {
       card.classList.add('focused', 'active');
       card.parentElement.classList.add('focused');
+
       serviceCards.forEach(c => {
         if (c !== card) c.classList.add('dimmed');
       });
 
       const details = card.querySelector('.service-details');
       if (details) {
+        details.classList.add('visible');
         details.style.maxHeight = details.scrollHeight + 'px';
         details.style.opacity = '1';
       }
-
-      // Scroll na środek
-      card.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-    }, 100); // ⏱️ opóźnienie 100ms = brak migania
+    }
   });
 });
 
-function resetCards() {
-  serviceCards.forEach(c => {
-    c.classList.remove('focused', 'dimmed', 'active', 'activating');
-    const d = c.querySelector('.service-details');
-    if (d) {
-      d.style.maxHeight = '0';
-      d.style.opacity = '0';
-    }
-  });
-}
 
 
 });

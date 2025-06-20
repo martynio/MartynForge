@@ -139,57 +139,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-// === USŁUGI: interaktywne kafelki z rozwijaniem tylko jednego ===
-const serviceCards = document.querySelectorAll('.service-card');
+  // === USŁUGI: rozwijanie tylko jednego kafla ===
+document.addEventListener('DOMContentLoaded', function () {
+  const cards = document.querySelectorAll('.service-card');
 
-serviceCards.forEach(card => {
-  card.addEventListener('click', () => {
-    const isFocused = card.classList.contains('focused');
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const isActive = card.classList.contains('active');
 
-    if (isFocused) {
-      // Jeśli już kliknięty, resetuj
-      resetCards();
-      return;
-    }
+      // Dezaktywuj wszystkie
+      cards.forEach(c => c.classList.remove('active'));
 
-    // Zanim reset – oznacz do aktywacji
-    card.classList.add('activating');
-
-    // Płynne przejście: reset + aktywacja z opóźnieniem
-    resetCards();
-
-    setTimeout(() => {
-      card.classList.add('focused', 'active');
-      card.parentElement.classList.add('focused');
-      serviceCards.forEach(c => {
-        if (c !== card) c.classList.add('dimmed');
-      });
-
-      const details = card.querySelector('.service-details');
-      if (details) {
-        details.style.maxHeight = details.scrollHeight + 'px';
-        details.style.opacity = '1';
+      // Jeśli nie był aktywny, aktywuj
+      if (!isActive) {
+        card.classList.add('active');
       }
-
-      // Scroll na środek
-      card.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-    }, 100); // ⏱️ opóźnienie 100ms = brak migania
+    });
   });
 });
-
-function resetCards() {
-  serviceCards.forEach(c => {
-    c.classList.remove('focused', 'dimmed', 'active', 'activating');
-    const d = c.querySelector('.service-details');
-    if (d) {
-      d.style.maxHeight = '0';
-      d.style.opacity = '0';
-    }
-  });
-}
-
 
 });

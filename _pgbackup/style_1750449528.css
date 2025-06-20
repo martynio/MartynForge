@@ -238,47 +238,26 @@ header.fixed-top {
     cursor: pointer;
 }
 
-/* === Service Cards: Interactivity & Visual === */
+/* === Service Cards Layout Fix === */
 .service-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  z-index: 1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
-/* Efekt aktywnej karty bez scale */
-.service-card.focused {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-  z-index: 3;
-}
-
-/* Pomniejszone bez transformacji – tylko wizualnie mniej jaskrawe */
-.service-card.dimmed {
-  opacity: 0.35;
-  filter: grayscale(0.2) brightness(0.9);
-}
-
-/* Rozwijana treść */
 .service-details {
-  max-height: 0 !important;
-  opacity: 0;
-  overflow: hidden;
-  transition: all 0.4s ease-in-out;
-}
-.service-card.active .service-details {
-  max-height: 500px !important;
-  opacity: 1;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
-/* Bootstrap fix */
-.service-row > .col {
-  display: flex;
-  flex-direction: column;
-}
-.service-card {
-  flex-grow: 1;
+.service-card.active .service-details {
+    max-height: 500px;
+
+    /* lub więcej, ale max-content nie zadziała z animacją */
+    opacity: 1;
 }

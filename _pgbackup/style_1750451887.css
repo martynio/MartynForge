@@ -238,47 +238,57 @@ header.fixed-top {
     cursor: pointer;
 }
 
-/* === Service Cards: Interactivity & Visual === */
+/* === Service Cards: Interactivity === */
 .service-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
-/* Efekt aktywnej karty bez scale */
 .service-card.focused {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-  z-index: 3;
+    transform: scale(1.04);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 }
 
-/* Pomniejszone bez transformacji – tylko wizualnie mniej jaskrawe */
-.service-card.dimmed {
-  opacity: 0.35;
-  filter: grayscale(0.2) brightness(0.9);
-}
-
-/* Rozwijana treść */
+/* Rozwijana treść – domyślnie ukryta */
 .service-details {
-  max-height: 0 !important;
-  opacity: 0;
-  overflow: hidden;
-  transition: all 0.4s ease-in-out;
-}
-.service-card.active .service-details {
-  max-height: 500px !important;
-  opacity: 1;
+    max-height: 0 !important;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
 }
 
-/* Bootstrap fix */
-.service-row > .col {
-  display: flex;
-  flex-direction: column;
+/* Widoczna treść po aktywacji */
+.service-card.active .service-details {
+    max-height: 500px !important;
+    opacity: 1;
 }
-.service-card {
-  flex-grow: 1;
+
+/* Przyciemnienie nieaktywnych */
+.service-card.dimmed {
+    filter: grayscale(100%) brightness(130%);
+    transform: scale(0.97);
+    pointer-events: none;
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Bootstrap alignment patch */
+.service-row {
+    align-items: stretch;
+}
+
+@media (min-width: 768px) {
+    .service-row > .col {
+        display: flex;
+        align-items: stretch;
+    }
+}
+
+.service-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
 }

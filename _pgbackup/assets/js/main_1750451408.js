@@ -144,23 +144,20 @@ const serviceCards = document.querySelectorAll('.service-card');
 
 serviceCards.forEach(card => {
   card.addEventListener('click', () => {
-    const isFocused = card.classList.contains('focused');
+    const isActive = card.classList.contains('active');
 
-    if (isFocused) {
-      // Jeśli już kliknięty, resetuj
-      resetCards();
-      return;
-    }
+    // Reset wszystkich
+    serviceCards.forEach(c => {
+      c.classList.remove('focused', 'dimmed', 'active');
+      const d = c.querySelector('.service-details');
+      if (d) {
+        d.style.maxHeight = '0';
+        d.style.opacity = '0';
+      }
+    });
 
-    // Zanim reset – oznacz do aktywacji
-    card.classList.add('activating');
-
-    // Płynne przejście: reset + aktywacja z opóźnieniem
-    resetCards();
-
-    setTimeout(() => {
+    if (!isActive) {
       card.classList.add('focused', 'active');
-      card.parentElement.classList.add('focused');
       serviceCards.forEach(c => {
         if (c !== card) c.classList.add('dimmed');
       });
@@ -171,25 +168,15 @@ serviceCards.forEach(card => {
         details.style.opacity = '1';
       }
 
-      // Scroll na środek
-      card.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-    }, 100); // ⏱️ opóźnienie 100ms = brak migania
-  });
-});
-
-function resetCards() {
-  serviceCards.forEach(c => {
-    c.classList.remove('focused', 'dimmed', 'active', 'activating');
-    const d = c.querySelector('.service-details');
-    if (d) {
-      d.style.maxHeight = '0';
-      d.style.opacity = '0';
+      setTimeout(() => {
+        card.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }, 300);
     }
   });
-}
+});
 
 
 });
