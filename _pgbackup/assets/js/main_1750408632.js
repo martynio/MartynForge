@@ -149,31 +149,16 @@ if (aiBtn && aiWidget && aiForm) {
       aiChat.scrollTop = aiChat.scrollHeight;
     }, 1000);
   });
-
+}
 document.addEventListener('DOMContentLoaded', function () {
   console.log("MartynForge JS loaded ✅");
 
-  // Znajdź wszystkie karty usług
-  const serviceCards = document.querySelectorAll('#Services .col-lg-4');
-
-  serviceCards.forEach(card => {
-    const details = card.querySelector('.service-details');
-    if (!details) return;
-
-    // Ustaw domyślny stan
-    details.style.maxHeight = "0";
-
-    card.style.cursor = "pointer";
-
+  const cards = document.querySelectorAll('#Services .col-lg-4');
+  cards.forEach(card => {
+    card.style.cursor = 'pointer';
     card.addEventListener('click', () => {
-      if (details.classList.contains('d-none')) {
-        details.classList.remove('d-none');
-        details.style.maxHeight = details.scrollHeight + "px";
-      } else {
-        details.style.maxHeight = "0";
-        setTimeout(() => details.classList.add('d-none'), 300);
-      }
+      const details = card.querySelector('.service-details');
+      if (details) details.classList.toggle('d-none');
     });
   });
 });
-

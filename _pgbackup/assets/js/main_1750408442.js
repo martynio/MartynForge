@@ -149,31 +149,19 @@ if (aiBtn && aiWidget && aiForm) {
       aiChat.scrollTop = aiChat.scrollHeight;
     }, 1000);
   });
-
+}
 document.addEventListener('DOMContentLoaded', function () {
-  console.log("MartynForge JS loaded ✅");
+    // Wybierz wszystkie karty usługowe
+    const serviceCards = document.querySelectorAll('#Services .col-lg-4');
 
-  // Znajdź wszystkie karty usług
-  const serviceCards = document.querySelectorAll('#Services .col-lg-4');
+    serviceCards.forEach(card => {
+        card.style.cursor = 'pointer'; // dodaj wskaźnik kliknięcia
 
-  serviceCards.forEach(card => {
-    const details = card.querySelector('.service-details');
-    if (!details) return;
-
-    // Ustaw domyślny stan
-    details.style.maxHeight = "0";
-
-    card.style.cursor = "pointer";
-
-    card.addEventListener('click', () => {
-      if (details.classList.contains('d-none')) {
-        details.classList.remove('d-none');
-        details.style.maxHeight = details.scrollHeight + "px";
-      } else {
-        details.style.maxHeight = "0";
-        setTimeout(() => details.classList.add('d-none'), 300);
-      }
+        card.addEventListener('click', function () {
+            const details = card.querySelector('.service-details');
+            if (details) {
+                details.classList.toggle('d-none');
+            }
+        });
     });
-  });
 });
-
