@@ -259,11 +259,13 @@ header.fixed-top {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1rem;
-    transition: transform 0.3s ease;
 }
 
 #services .border {
     cursor: pointer;
+}
+
+#services .border {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

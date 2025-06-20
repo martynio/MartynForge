@@ -10,12 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* === Sekcja ABOUT: rotacja grafik === */
   const images = [
-  'assets/about/anvil1.png',
-  'assets/about/anvil2.png',
-  'assets/about/anvil3.png',
-  'assets/about/anvil4.png'
-];
-
+    'assets/about/anvil1.png',
+    'assets/about/anvil2.png',
+    'assets/about/anvil3.png',
+    'assets/about/anvil4.png'
+  ];
   let index = 0;
   const imageElement = document.getElementById('aboutImage');
 
@@ -43,29 +42,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* === Formularz newslettera === */
   const newsletterForm = document.querySelector("form[action='newsletter']");
+  const submitBtn = document.querySelector('.mf-btn-submit');
+
   if (newsletterForm) {
     newsletterForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const email = this.querySelector("input[type='email']").value.trim();
-     // alert(email && email.includes("@")
-      //  ? "Dziękujemy! Dodano do newslettera: " + email
-      //  : "Podaj poprawny adres email.");
-    });
-  }
-
-  /* === Placeholderowe przyciski === */
-  document.querySelectorAll("a.btn[href='#']").forEach(btn => {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      alert("Funkcja w przygotowaniu: " + this.textContent.trim());
-    });
-  });
-});
-  /* === Animacja "wysłano" dla przycisku newslettera === */
-  const submitBtn = document.querySelector('.mf-btn-submit');
-  if (newsletterForm && submitBtn) {
-    newsletterForm.addEventListener('submit', function (e) {
-      e.preventDefault(); // nadpisuje alert z powyżej
       const email = this.querySelector("input[type='email']").value.trim();
       if (!email || !email.includes("@")) {
         alert("Podaj poprawny adres email.");
@@ -84,6 +65,14 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 2000);
     });
   }
+
+  /* === Placeholderowe przyciski === */
+  document.querySelectorAll("a.btn[href='#']").forEach(btn => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      alert("Funkcja w przygotowaniu: " + this.textContent.trim());
+    });
+  });
 
   /* === Smooth scroll === */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -108,77 +97,77 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.style.transform = 'scale(1)';
     });
   });
-// === AI Widget Logic ===
-const aiBtn = document.querySelector('a[href="#ai"]'); // Twój przycisk
-const aiWidget = document.getElementById('ai-widget');
-const aiClose = document.getElementById('ai-close');
-const aiForm = document.getElementById('ai-form');
-const aiInput = document.getElementById('ai-input');
-const aiChat = document.getElementById('ai-chat');
 
-if (aiBtn && aiWidget && aiForm) {
-  aiBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    aiWidget.classList.remove('hidden');
-  });
+  /* === AI Widget === */
+  const aiBtn = document.querySelector('a[href="#ai"]');
+  const aiWidget = document.getElementById('ai-widget');
+  const aiClose = document.getElementById('ai-close');
+  const aiForm = document.getElementById('ai-form');
+  const aiInput = document.getElementById('ai-input');
+  const aiChat = document.getElementById('ai-chat');
 
-  aiClose.addEventListener('click', () => {
-    aiWidget.classList.add('hidden');
-  });
+  if (aiBtn && aiWidget && aiForm) {
+    aiBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      aiWidget.classList.remove('hidden');
+    });
 
-  aiForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const userMsg = aiInput.value.trim();
-    if (!userMsg) return;
+    aiClose.addEventListener('click', () => {
+      aiWidget.classList.add('hidden');
+    });
 
-    // Dodaj wiadomość użytkownika
-    const userBubble = document.createElement('div');
-    userBubble.className = 'ai-bubble user';
-    userBubble.textContent = userMsg;
-    aiChat.appendChild(userBubble);
+    aiForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const userMsg = aiInput.value.trim();
+      if (!userMsg) return;
 
-    aiInput.value = '';
-    aiChat.scrollTop = aiChat.scrollHeight;
+      const userBubble = document.createElement('div');
+      userBubble.className = 'ai-bubble user';
+      userBubble.textContent = userMsg;
+      aiChat.appendChild(userBubble);
 
-    // Fake AI reply
-    setTimeout(() => {
-      const aiReply = document.createElement('div');
-      aiReply.className = 'ai-bubble ai';
-      aiReply.textContent = "I'm thinking about that...";
-      aiChat.appendChild(aiReply);
+      aiInput.value = '';
       aiChat.scrollTop = aiChat.scrollHeight;
-    }, 1000);
-  });
 
-document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(() => {
+        const aiReply = document.createElement('div');
+        aiReply.className = 'ai-bubble ai';
+        aiReply.textContent = "I'm thinking about that...";
+        aiChat.appendChild(aiReply);
+        aiChat.scrollTop = aiChat.scrollHeight;
+      }, 1000);
+    });
+  }
+
+  /* === USŁUGI === */
   console.log("MartynForge JS loaded ✅");
-
-  // Znajdź wszystkie karty usług
-    const serviceCards = document.querySelectorAll('#services .col-lg-4');
+  const serviceCards = document.querySelectorAll('#services .col-lg-4 > .border');
+  console.log("Znaleziono usług:", serviceCards.length);
 
   serviceCards.forEach(card => {
     const details = card.querySelector('.service-details');
     if (!details) return;
 
-    // Ustaw domyślny stan
     details.style.maxHeight = "0";
+    details.style.overflow = "hidden";
+    details.style.transition = "max-height 0.4s ease";
 
     card.style.cursor = "pointer";
 
     card.addEventListener('click', () => {
-      if (details.classList.contains('d-none')) {
-  details.classList.remove('d-none');
-  // Poczekaj aż element stanie się widoczny, wtedy oblicz scrollHeight
-  requestAnimationFrame(() => {
-    details.style.maxHeight = details.scrollHeight + "px";
-  });
-} else {
-  details.style.maxHeight = "0";
-  setTimeout(() => details.classList.add('d-none'), 400);
-}
+      const isHidden = details.classList.contains('d-none');
 
+      if (isHidden) {
+        details.classList.remove('d-none');
+        requestAnimationFrame(() => {
+          details.style.maxHeight = details.scrollHeight + "px";
+        });
+      } else {
+        details.style.maxHeight = "0";
+        setTimeout(() => {
+          details.classList.add('d-none');
+        }, 400);
+      }
     });
   });
 });
-};
-
