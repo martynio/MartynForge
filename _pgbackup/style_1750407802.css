@@ -237,8 +237,3 @@ header.fixed-top {
     padding: 0 12px;
     cursor: pointer;
 }
-
-.service-details {
-    transition: max-height 0.4s ease;
-    overflow: hidden;
-}

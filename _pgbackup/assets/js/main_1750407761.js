@@ -150,18 +150,3 @@ if (aiBtn && aiWidget && aiForm) {
     }, 1000);
   });
 }
-document.addEventListener('DOMContentLoaded', function () {
-    // Wybierz wszystkie karty usługowe
-    const serviceCards = document.querySelectorAll('#Services .col-lg-4');
-
-    serviceCards.forEach(card => {
-        card.style.cursor = 'pointer'; // dodaj wskaźnik kliknięcia
-
-        card.addEventListener('click', function () {
-            const details = card.querySelector('.service-details');
-            if (details) {
-                details.classList.toggle('d-none');
-            }
-        });
-    });
-});
