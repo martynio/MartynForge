@@ -167,18 +167,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     card.addEventListener('click', () => {
       if (details.classList.contains('d-none')) {
-  details.classList.remove('d-none');
-  // Poczekaj aż element stanie się widoczny, wtedy oblicz scrollHeight
-  requestAnimationFrame(() => {
-    details.style.maxHeight = details.scrollHeight + "px";
-  });
-} else {
-  details.style.maxHeight = "0";
-  setTimeout(() => details.classList.add('d-none'), 400);
-}
-
+        details.classList.remove('d-none');
+        details.style.maxHeight = details.scrollHeight + "px";
+      } else {
+        details.style.maxHeight = "0";
+        setTimeout(() => details.classList.add('d-none'), 300);
+      }
     });
   });
 });
-};
-

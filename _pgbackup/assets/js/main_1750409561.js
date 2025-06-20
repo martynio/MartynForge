@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log("MartynForge JS loaded ✅");
 
   // Znajdź wszystkie karty usług
-    const serviceCards = document.querySelectorAll('#services .col-lg-4');
+  const serviceCards = document.querySelectorAll('#Services .col-lg-4');
 
   serviceCards.forEach(card => {
     const details = card.querySelector('.service-details');
@@ -167,18 +167,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     card.addEventListener('click', () => {
       if (details.classList.contains('d-none')) {
-  details.classList.remove('d-none');
-  // Poczekaj aż element stanie się widoczny, wtedy oblicz scrollHeight
-  requestAnimationFrame(() => {
-    details.style.maxHeight = details.scrollHeight + "px";
-  });
-} else {
-  details.style.maxHeight = "0";
-  setTimeout(() => details.classList.add('d-none'), 400);
-}
-
+        details.classList.remove('d-none');
+        details.style.maxHeight = details.scrollHeight + "px";
+      } else {
+        details.style.maxHeight = "0";
+        setTimeout(() => details.classList.add('d-none'), 300);
+      }
     });
   });
 });
-};
-

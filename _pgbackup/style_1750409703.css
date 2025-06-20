@@ -244,17 +244,17 @@ header.fixed-top {
 }
 
 /* === Service Cards Layout Fix === */
-#services .col-lg-4 {
+#Services .col-lg-4 {
     display: flex;
 }
 
-#services .col-lg-4 > .border {
+#Services .col-lg-4 > .border {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-#services .border img {
+#Services .border img {
     display: block;
     margin-left: auto;
     margin-right: auto;
