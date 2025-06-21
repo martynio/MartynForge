@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // === Pasek językowy ===
   const langBar = document.querySelector('.language-bar');
+
+  // === Pasek językowy ===
   window.addEventListener('scroll', function () {
     if (!langBar) return;
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -97,99 +98,92 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-// === Aurora Mini: Dock czatu ===
-const entryBar = document.getElementById("ai-entry");
-const chatPanel = document.getElementById("aiChatPanel");
-const openBtn = document.getElementById("aiOpenBtn");
-const closeBtn = document.getElementById("aiCloseBtn");
-const chatInput = document.getElementById("aiChatInput");
-const chatBody = document.getElementById("aiChatBody");
-const sendBtn = document.getElementById("aiSendBtn");
+  // === AI Widget ===
+   const input = document.getElementById("aiInput");
+  const button = document.getElementById("aiBtn");
+  const modal = new bootstrap.Modal(document.getElementById("aiModal"));
+  const responseBox = document.getElementById("aiResponse");
 
-const fakeAIResponse = (userText) => {
-  const q = userText.toLowerCase();
-  if (q.includes("logo")) return "Logo zazwyczaj od 150€, zależnie od stylu.";
-  if (q.includes("strona")) return "Strony zaczynają się od 400€, z pełną responsywnością.";
-  return "Chętnie pomogę — napisz więcej!";
-};
+  const fakeAI = (query) => {
+    const q = query.toLowerCase();
+    if (q.includes("logo")) return "Tworzę unikalne logotypy, które oddają ducha Twojej marki.";
+    if (q.includes("strona") || q.includes("website")) return "Projektuję nowoczesne, responsywne strony internetowe.";
+    if (q.includes("cena") || q.includes("koszt")) return "Ceny zależą od zakresu – chętnie przygotuję propozycję.";
+    return "Zadaj pytanie o ofertę, projekt lub dowolny temat – chętnie pomogę!";
+  };
 
-const addMessage = (text, sender = "user") => {
-  const div = document.createElement("div");
-  div.classList.add("mb-2", "text-start");
-  div.innerHTML = `<span class="badge ${sender === "ai" ? 'bg-warning text-dark' : 'bg-primary'}">${text}</span>`;
-  chatBody.appendChild(div);
-  chatBody.scrollTop = chatBody.scrollHeight;
-};
+  const handleSearch = () => {
+    const query = input.value.trim();
+    if (query === "") return;
 
-const sendMessage = () => {
-  const text = chatInput.value.trim();
-  if (!text) return;
-  addMessage(text, "user");
-  chatInput.value = "";
+    const isQuestion = /(\?|jak|czy|dlaczego|co|ile|kiedy)/i.test(query);
+    if (isQuestion) {
+      const response = fakeAI(query);
+      responseBox.textContent = response;
+      modal.show();
+    } else {
+      // Przekierowanie do sekcji
+      window.location.href = "/#oferta";
+    }
+  };
 
-  setTimeout(() => {
-    addMessage(fakeAIResponse(text), "ai");
-  }, 600);
-};
-
-[entryBar, openBtn].forEach(el => el?.addEventListener("click", () => {
-  chatPanel.style.display = "block";
-}));
-
-closeBtn?.addEventListener("click", () => {
-  chatPanel.style.display = "none";
-});
-
-sendBtn?.addEventListener("click", sendMessage);
-chatInput?.addEventListener("keydown", e => {
-  if (e.key === "Enter") sendMessage();
-});
-
-  // === Interaktywne kafelki usług ===
-  const serviceCards = document.querySelectorAll('.service-card');
-
-  function resetCards() {
-    serviceCards.forEach(c => {
-      c.classList.remove('focused', 'dimmed', 'active', 'activating');
-      const d = c.querySelector('.service-details');
-      if (d) {
-        d.style.maxHeight = '0';
-        d.style.opacity = '0';
-      }
-    });
-  }
-
-  serviceCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const isFocused = card.classList.contains('focused');
-
-      if (isFocused) {
-        resetCards();
-        return;
-      }
-
-      card.classList.add('activating');
-      resetCards();
-
-      setTimeout(() => {
-        card.classList.add('focused', 'active');
-        card.parentElement.classList.add('focused');
-        serviceCards.forEach(c => {
-          if (c !== card) c.classList.add('dimmed');
-        });
-
-        const details = card.querySelector('.service-details');
-        if (details) {
-          details.style.maxHeight = details.scrollHeight + 'px';
-          details.style.opacity = '1';
-        }
-
-        card.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
-      }, 100);
-    });
+  button.addEventListener("click", handleSearch);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") handleSearch();
   });
 });
 
+// === USŁUGI: interaktywne kafelki z rozwijaniem tylko jednego ===
+const serviceCards = document.querySelectorAll('.service-card');
+
+serviceCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const isFocused = card.classList.contains('focused');
+
+    if (isFocused) {
+      // Jeśli już kliknięty, resetuj
+      resetCards();
+      return;
+    }
+
+    // Zanim reset – oznacz do aktywacji
+    card.classList.add('activating');
+
+    // Płynne przejście: reset + aktywacja z opóźnieniem
+    resetCards();
+
+    setTimeout(() => {
+      card.classList.add('focused', 'active');
+      card.parentElement.classList.add('focused');
+      serviceCards.forEach(c => {
+        if (c !== card) c.classList.add('dimmed');
+      });
+
+      const details = card.querySelector('.service-details');
+      if (details) {
+        details.style.maxHeight = details.scrollHeight + 'px';
+        details.style.opacity = '1';
+      }
+
+      // Scroll na środek
+      card.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }, 100); // ⏱️ opóźnienie 100ms = brak migania
+  });
+});
+
+function resetCards() {
+  serviceCards.forEach(c => {
+    c.classList.remove('focused', 'dimmed', 'active', 'activating');
+    const d = c.querySelector('.service-details');
+    if (d) {
+      d.style.maxHeight = '0';
+      d.style.opacity = '0';
+    }
+  });
+}
+
+
+});

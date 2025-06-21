@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // === Pasek językowy ===
   const langBar = document.querySelector('.language-bar');
+
+  // === Pasek językowy ===
   window.addEventListener('scroll', function () {
     if (!langBar) return;
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -97,99 +98,98 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-// === Aurora Mini: Dock czatu ===
-const entryBar = document.getElementById("ai-entry");
-const chatPanel = document.getElementById("aiChatPanel");
-const openBtn = document.getElementById("aiOpenBtn");
-const closeBtn = document.getElementById("aiCloseBtn");
-const chatInput = document.getElementById("aiChatInput");
-const chatBody = document.getElementById("aiChatBody");
-const sendBtn = document.getElementById("aiSendBtn");
+  // === AI Widget ===
+  const aiBtn = document.querySelector('a[href="#ai"]');
+  const aiWidget = document.getElementById('ai-widget');
+  const aiClose = document.getElementById('ai-close');
+  const aiForm = document.getElementById('ai-form');
+  const aiInput = document.getElementById('ai-input');
+  const aiChat = document.getElementById('ai-chat');
 
-const fakeAIResponse = (userText) => {
-  const q = userText.toLowerCase();
-  if (q.includes("logo")) return "Logo zazwyczaj od 150€, zależnie od stylu.";
-  if (q.includes("strona")) return "Strony zaczynają się od 400€, z pełną responsywnością.";
-  return "Chętnie pomogę — napisz więcej!";
-};
+  if (aiBtn && aiWidget && aiForm) {
+    aiBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      aiWidget.classList.remove('hidden');
+    });
 
-const addMessage = (text, sender = "user") => {
-  const div = document.createElement("div");
-  div.classList.add("mb-2", "text-start");
-  div.innerHTML = `<span class="badge ${sender === "ai" ? 'bg-warning text-dark' : 'bg-primary'}">${text}</span>`;
-  chatBody.appendChild(div);
-  chatBody.scrollTop = chatBody.scrollHeight;
-};
+    aiClose.addEventListener('click', () => {
+      aiWidget.classList.add('hidden');
+    });
 
-const sendMessage = () => {
-  const text = chatInput.value.trim();
-  if (!text) return;
-  addMessage(text, "user");
-  chatInput.value = "";
+    aiForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const userMsg = aiInput.value.trim();
+      if (!userMsg) return;
 
-  setTimeout(() => {
-    addMessage(fakeAIResponse(text), "ai");
-  }, 600);
-};
+      const userBubble = document.createElement('div');
+      userBubble.className = 'ai-bubble user';
+      userBubble.textContent = userMsg;
+      aiChat.appendChild(userBubble);
 
-[entryBar, openBtn].forEach(el => el?.addEventListener("click", () => {
-  chatPanel.style.display = "block";
-}));
+      aiInput.value = '';
+      aiChat.scrollTop = aiChat.scrollHeight;
 
-closeBtn?.addEventListener("click", () => {
-  chatPanel.style.display = "none";
-});
-
-sendBtn?.addEventListener("click", sendMessage);
-chatInput?.addEventListener("keydown", e => {
-  if (e.key === "Enter") sendMessage();
-});
-
-  // === Interaktywne kafelki usług ===
-  const serviceCards = document.querySelectorAll('.service-card');
-
-  function resetCards() {
-    serviceCards.forEach(c => {
-      c.classList.remove('focused', 'dimmed', 'active', 'activating');
-      const d = c.querySelector('.service-details');
-      if (d) {
-        d.style.maxHeight = '0';
-        d.style.opacity = '0';
-      }
+      setTimeout(() => {
+        const aiReply = document.createElement('div');
+        aiReply.className = 'ai-bubble ai';
+        aiReply.textContent = "I'm thinking about that...";
+        aiChat.appendChild(aiReply);
+        aiChat.scrollTop = aiChat.scrollHeight;
+      }, 1000);
     });
   }
 
-  serviceCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const isFocused = card.classList.contains('focused');
+// === USŁUGI: interaktywne kafelki z rozwijaniem tylko jednego ===
+const serviceCards = document.querySelectorAll('.service-card');
 
-      if (isFocused) {
-        resetCards();
-        return;
+serviceCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const isFocused = card.classList.contains('focused');
+
+    if (isFocused) {
+      // Jeśli już kliknięty, resetuj
+      resetCards();
+      return;
+    }
+
+    // Zanim reset – oznacz do aktywacji
+    card.classList.add('activating');
+
+    // Płynne przejście: reset + aktywacja z opóźnieniem
+    resetCards();
+
+    setTimeout(() => {
+      card.classList.add('focused', 'active');
+      card.parentElement.classList.add('focused');
+      serviceCards.forEach(c => {
+        if (c !== card) c.classList.add('dimmed');
+      });
+
+      const details = card.querySelector('.service-details');
+      if (details) {
+        details.style.maxHeight = details.scrollHeight + 'px';
+        details.style.opacity = '1';
       }
 
-      card.classList.add('activating');
-      resetCards();
-
-      setTimeout(() => {
-        card.classList.add('focused', 'active');
-        card.parentElement.classList.add('focused');
-        serviceCards.forEach(c => {
-          if (c !== card) c.classList.add('dimmed');
-        });
-
-        const details = card.querySelector('.service-details');
-        if (details) {
-          details.style.maxHeight = details.scrollHeight + 'px';
-          details.style.opacity = '1';
-        }
-
-        card.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
-      }, 100);
-    });
+      // Scroll na środek
+      card.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }, 100); // ⏱️ opóźnienie 100ms = brak migania
   });
 });
 
+function resetCards() {
+  serviceCards.forEach(c => {
+    c.classList.remove('focused', 'dimmed', 'active', 'activating');
+    const d = c.querySelector('.service-details');
+    if (d) {
+      d.style.maxHeight = '0';
+      d.style.opacity = '0';
+    }
+  });
+}
+
+
+});

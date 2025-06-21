@@ -84,32 +84,30 @@
                             <h1 class="display-3 fw-normal ">&quot;Incepta tua &mdash; forma nostra.&quot;</h1> 
                             <p class="lead mb-5">Twoje pomysły &mdash; nasza forma.</p> 
                             <form id="search-form"> 
-                                <div id="ai-entry" class="d-flex align-items-center justify-content-between rounded-pill shadow px-3 py-2 bg-white mx-auto mb-4" style="cursor:pointer; max-width: 500px; border: 2px solid #cc5500;">
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <img src="assets/icons/avatar-kuznia.svg" alt="Asystent Kuźni" width="28" height="28" class="me-2"><span class="text-muted" style="white-space: nowrap;">Zadaj pytanie...</span>
+                                <div class="gx-2 row justify-content-center">
+                                    <div class="col-sm-auto mb-3">
+                                        <input type="text" id="aiInput" class="form-control form-control-lg ps-4 pe-4 rounded-pill" placeholder="Czego szukasz? Zadaj pytanie…"/>
                                     </div>
-                                    <button class="btn p-0 ms-2" id="aiOpenBtn" aria-label="Otwórz czat">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#cc5500" width="24" height="24" viewBox="0 0 24 24">
-                                            <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
-                                        </svg>
-                                    </button>
+                                    <div class="col-sm-auto mb-3 text-end">
+                                        <button type="button" id="aiBtn" class="mf-btn mf-btn-primary" aria-label="Search">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="20" height="20" class="me-1">
+                                                <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zM11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14z"></path>
+                                            </svg><span class="align-middle">Szukaj</span>
+                                        </button>
+                                    </div>
                                 </div>
-                                <!-- Aurora Mini: Dock czatu -->
-                                <div id="aiChatPanel" class="rounded shadow mt-3" style="max-width: 500px; background: #fff8ee; border: 2px solid #cc5500; display: none;">
-                                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom" style="background: #ffe3cc;">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/icons/avatar-kuznia.svg" alt="Aurora" width="24" height="24" class="me-2"><strong>Asystent Kuźni</strong>
+                                <!-- Modal dla odpowiedzi AI -->
+                                <div class="modal fade" id="aiModal" tabindex="-1" aria-labelledby="aiModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content border-0 shadow">
+                                            <div class="modal-header bg-dark text-white">
+                                                <h5 class="modal-title" id="aiModalLabel">Odpowiedź AI</h5>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+                                            </div>
+                                            <div class="modal-body" id="aiResponse">
+                                                ...
+</div>
                                         </div>
-                                        <button id="aiCloseBtn" class="btn-close" aria-label="Zamknij"></button>
-                                    </div>
-                                    <div id="aiChatBody" class="px-3 py-2" style="max-height: 250px; overflow-y: auto; font-size: 0.95rem;">
-                                        <div class="mb-2">
-                                            <span class="badge bg-warning text-dark">W czym mogę pomóc?</span>
-                                        </div>
-                                    </div>
-                                    <div class="px-3 py-2 border-top d-flex align-items-center">
-                                        <input type="text" id="aiChatInput" class="form-control form-control-sm me-2" placeholder="Zadaj pytanie...">
-                                        <button id="aiSendBtn" class="btn btn-sm" style="background: #cc5500; color: white;">⮞</button>
                                     </div>
                                 </div>
                             </form>

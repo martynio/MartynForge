@@ -97,8 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-// === Aurora Mini: Dock czatu ===
-const entryBar = document.getElementById("ai-entry");
+  // === AI Modal Bot ===
+ const entryBar = document.getElementById("ai-entry");
 const chatPanel = document.getElementById("aiChatPanel");
 const openBtn = document.getElementById("aiOpenBtn");
 const closeBtn = document.getElementById("aiCloseBtn");
@@ -107,10 +107,8 @@ const chatBody = document.getElementById("aiChatBody");
 const sendBtn = document.getElementById("aiSendBtn");
 
 const fakeAIResponse = (userText) => {
-  const q = userText.toLowerCase();
-  if (q.includes("logo")) return "Logo zazwyczaj od 150€, zależnie od stylu.";
-  if (q.includes("strona")) return "Strony zaczynają się od 400€, z pełną responsywnością.";
-  return "Chętnie pomogę — napisz więcej!";
+  if (userText.toLowerCase().includes("logo")) return "Logo zaczyna się od 150€, ale zależy od stylu.";
+  return "Chętnie pomogę — opowiedz więcej.";
 };
 
 const addMessage = (text, sender = "user") => {
@@ -129,7 +127,7 @@ const sendMessage = () => {
 
   setTimeout(() => {
     addMessage(fakeAIResponse(text), "ai");
-  }, 600);
+  }, 500);
 };
 
 [entryBar, openBtn].forEach(el => el?.addEventListener("click", () => {

@@ -94,22 +94,18 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <!-- Aurora Mini: Dock czatu -->
-                                <div id="aiChatPanel" class="rounded shadow mt-3" style="max-width: 500px; background: #fff8ee; border: 2px solid #cc5500; display: none;">
-                                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom" style="background: #ffe3cc;">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/icons/avatar-kuznia.svg" alt="Aurora" width="24" height="24" class="me-2"><strong>Asystent Kuźni</strong>
+                                <!-- Modal dla odpowiedzi AI -->
+                                <div class="modal fade" id="aiModal" tabindex="-1" aria-labelledby="aiModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content border-0 shadow">
+                                            <div class="modal-header bg-dark text-white">
+                                                <h5 class="modal-title" id="aiModalLabel">Odpowiedź AI</h5>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+                                            </div>
+                                            <div class="modal-body" id="aiResponse">
+                                                ...
+</div>
                                         </div>
-                                        <button id="aiCloseBtn" class="btn-close" aria-label="Zamknij"></button>
-                                    </div>
-                                    <div id="aiChatBody" class="px-3 py-2" style="max-height: 250px; overflow-y: auto; font-size: 0.95rem;">
-                                        <div class="mb-2">
-                                            <span class="badge bg-warning text-dark">W czym mogę pomóc?</span>
-                                        </div>
-                                    </div>
-                                    <div class="px-3 py-2 border-top d-flex align-items-center">
-                                        <input type="text" id="aiChatInput" class="form-control form-control-sm me-2" placeholder="Zadaj pytanie...">
-                                        <button id="aiSendBtn" class="btn btn-sm" style="background: #cc5500; color: white;">⮞</button>
                                     </div>
                                 </div>
                             </form>
