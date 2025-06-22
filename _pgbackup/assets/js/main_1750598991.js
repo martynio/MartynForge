@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const langBar = document.querySelector('.language-bar');
-
   // === Pasek językowy ===
+  const langBar = document.querySelector('.language-bar');
   window.addEventListener('scroll', function () {
     if (!langBar) return;
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -98,82 +97,116 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // === AI Widget ===
-  const aiBtn = document.querySelector('a[href="#ai"]');
-  const aiWidget = document.getElementById('ai-widget');
-  const aiClose = document.getElementById('ai-close');
-  const aiForm = document.getElementById('ai-form');
-  const aiInput = document.getElementById('ai-input');
-  const aiChat = document.getElementById('ai-chat');
+// === Aurora Mini: Dock czatu ===
+const entryBar = document.getElementById("ai-entry");
+const chatPanel = document.getElementById("aiChatPanel");
+const openBtn = document.getElementById("aiOpenBtn");
+const closeBtn = document.getElementById("aiCloseBtn");
+const chatInput = document.getElementById("aiChatInput");
+const chatBody = document.getElementById("aiChatBody");
+const sendBtn = document.getElementById("aiSendBtn");
 
-  if (aiBtn && aiWidget && aiForm) {
-    aiBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      aiWidget.classList.remove('hidden');
-    });
+const fakeAIResponse = (userText) => {
+  const q = userText.toLowerCase();
+  if (q.includes("logo")) return "Logo zazwyczaj od 150€, zależnie od stylu.";
+  if (q.includes("strona")) return "Strony zaczynają się od 400€, z pełną responsywnością.";
+  return "Chętnie pomogę — napisz więcej!";
+};
 
-    aiClose.addEventListener('click', () => {
-      aiWidget.classList.add('hidden');
-    });
+const addMessage = (text, sender = "user") => {
+  const message = document.createElement("div");
+  message.classList.add("chat-message", sender === "ai" ? "ai" : "user");
 
-    aiForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const userMsg = aiInput.value.trim();
-      if (!userMsg) return;
+  const bubble = document.createElement("div");
+  bubble.classList.add("bubble");
+  bubble.textContent = text;
 
-      const userBubble = document.createElement('div');
-      userBubble.className = 'ai-bubble user';
-      userBubble.textContent = userMsg;
-      aiChat.appendChild(userBubble);
+  const avatar = document.createElement("img");
+  avatar.src = sender === "ai" ? "assets/icons/avatar-kuznia.svg" : "assets/icons/avatar-user.svg";
+  avatar.alt = sender === "ai" ? "AI" : "Ty";
+  avatar.classList.add("avatar");
 
-      aiInput.value = '';
-      aiChat.scrollTop = aiChat.scrollHeight;
-
-      setTimeout(() => {
-        const aiReply = document.createElement('div');
-        aiReply.className = 'ai-bubble ai';
-        aiReply.textContent = "I'm thinking about that...";
-        aiChat.appendChild(aiReply);
-        aiChat.scrollTop = aiChat.scrollHeight;
-      }, 1000);
-    });
+  if (sender === "ai") {
+    message.appendChild(avatar);
+    message.appendChild(bubble);
+  } else {
+    message.appendChild(bubble);
+    message.appendChild(avatar);
   }
 
-  // === USŁUGI: rozwijanie tylko jednego kafla ===
-const serviceCards = document.querySelectorAll('.service-card');
+  chatBody.appendChild(message);
+  chatBody.scrollTop = chatBody.scrollHeight;
+};
 
-serviceCards.forEach(card => {
-  const details = card.querySelector('.service-details');
-  if (!details) return;
+const sendMessage = () => {
+  const text = chatInput.value.trim();
+  if (!text) return;
+  addMessage(text, "user");
+  chatInput.value = "";
 
-  // Reset style
-  details.classList.remove('visible');
-  details.style.maxHeight = '0';
-  details.style.opacity = '0';
+  setTimeout(() => {
+    addMessage(fakeAIResponse(text), "ai");
+  }, 600);
+};
 
-  card.addEventListener('click', () => {
-    const isOpen = details.classList.contains('visible');
+[entryBar, openBtn].forEach(el => el?.addEventListener("click", () => {
+  chatPanel.style.display = "block";
+}));
 
-    // Zamknij wszystkie inne
+closeBtn?.addEventListener("click", () => {
+  chatPanel.style.display = "none";
+});
+
+sendBtn?.addEventListener("click", sendMessage);
+chatInput?.addEventListener("keydown", e => {
+  if (e.key === "Enter") sendMessage();
+});
+
+  // === Interaktywne kafelki usług ===
+  const serviceCards = document.querySelectorAll('.service-card');
+
+  function resetCards() {
     serviceCards.forEach(c => {
+      c.classList.remove('focused', 'dimmed', 'active', 'activating');
       const d = c.querySelector('.service-details');
-      if (d && d !== details) {
-        d.classList.remove('visible');
+      if (d) {
         d.style.maxHeight = '0';
         d.style.opacity = '0';
       }
     });
+  }
 
-    // Toggle aktualny
-    if (!isOpen) {
-      details.classList.add('visible');
-      details.style.maxHeight = details.scrollHeight + 'px';
-      details.style.opacity = '1';
-    } else {
-      details.classList.remove('visible');
-      details.style.maxHeight = '0';
-      details.style.opacity = '0';
-    }
+  serviceCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const isFocused = card.classList.contains('focused');
+
+      if (isFocused) {
+        resetCards();
+        return;
+      }
+
+      card.classList.add('activating');
+      resetCards();
+
+      setTimeout(() => {
+        card.classList.add('focused', 'active');
+        card.parentElement.classList.add('focused');
+        serviceCards.forEach(c => {
+          if (c !== card) c.classList.add('dimmed');
+        });
+
+        const details = card.querySelector('.service-details');
+        if (details) {
+          details.style.maxHeight = details.scrollHeight + 'px';
+          details.style.opacity = '1';
+        }
+
+        card.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }, 100);
+    });
   });
 });
-});
+

@@ -30,15 +30,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // === Formularz wyszukiwania ===
-// Dezaktywujemy domyślne alerty – czat przejmuje tę funkcję
-const searchForm = document.getElementById("search-form");
-if (searchForm) {
-  searchForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    // Nie robimy nic – obsługuje to sekcja czatu
-  });
-}
-
+  const searchForm = document.getElementById("search-form");
+  if (searchForm) {
+    searchForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const value = this.querySelector("input[type='text']").value.trim();
+      alert(value ? "Wyszukujesz: " + value : "Wpisz coś, co chcesz znaleźć!");
+    });
+  }
 
   // === Formularz newslettera ===
   const newsletterForm = document.querySelector("form[action='newsletter']");
@@ -98,14 +97,19 @@ if (searchForm) {
     });
   });
 
+// === Aurora Mini: Dock czatu ===
+const entryBar = document.getElementById("ai-entry");
+const chatPanel = document.getElementById("aiChatPanel");
+const openBtn = document.getElementById("aiOpenBtn");
+const closeBtn = document.getElementById("aiCloseBtn");
+const chatInput = document.getElementById("aiChatInput");
 const chatBody = document.getElementById("aiChatBody");
-const input = document.getElementById("aiInput");
 const sendBtn = document.getElementById("aiSendBtn");
 
 let chatInitialized = false;
 
-const fakeAIResponse = (text) => {
-  const q = text.toLowerCase();
+const fakeAIResponse = (userText) => {
+  const q = userText.toLowerCase();
   if (q.includes("logo")) return "Logo zazwyczaj od 150€, zależnie od stylu.";
   if (q.includes("strona")) return "Strony zaczynają się od 400€, z pełną responsywnością.";
   return "Chętnie pomogę — napisz więcej!";
@@ -113,16 +117,16 @@ const fakeAIResponse = (text) => {
 
 const addMessage = (text, sender = "user") => {
   const message = document.createElement("div");
-  message.classList.add("chat-message", sender);
-
-  const avatar = document.createElement("img");
-  avatar.classList.add("avatar");
-  avatar.src = sender === "ai" ? "assets/icons/avatar-kuznia.svg" : "assets/icons/avatar-user.svg";
-  avatar.alt = sender === "ai" ? "AI" : "Ty";
+  message.classList.add("chat-message", sender === "ai" ? "ai" : "user");
 
   const bubble = document.createElement("div");
   bubble.classList.add("bubble");
   bubble.textContent = text;
+
+  const avatar = document.createElement("img");
+  avatar.src = sender === "ai" ? "assets/icons/avatar-kuznia.svg" : "assets/icons/avatar-user.svg";
+  avatar.alt = sender === "ai" ? "AI" : "Ty";
+  avatar.classList.add("avatar");
 
   if (sender === "ai") {
     message.appendChild(avatar);
@@ -137,31 +141,34 @@ const addMessage = (text, sender = "user") => {
 };
 
 const sendMessage = () => {
-  const text = input.value.trim();
+  const text = chatInput.value.trim();
   if (!text) return;
-
-  // Inicjalizacja czatu i rozwinięcie panelu
-  if (!chatInitialized) {
-    chatBody.style.display = "block";
-    addMessage("W czym mogę pomóc?", "ai");
-    chatInitialized = true;
-  }
-
   addMessage(text, "user");
-  input.value = "";
+  chatInput.value = "";
 
   setTimeout(() => {
     addMessage(fakeAIResponse(text), "ai");
-  }, 500);
+  }, 600);
 };
 
-sendBtn.addEventListener("click", sendMessage);
-
-input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    sendMessage();
+// rozwijanie z animacją + pierwsze zdanie AI
+[entryBar, openBtn].forEach(el => el?.addEventListener("click", () => {
+  if (!chatInitialized) {
+    addMessage("W czym mogę pomóc?", "ai");
+    chatInitialized = true;
   }
+  chatPanel.classList.add("open");
+  chatPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+}));
+
+
+closeBtn?.addEventListener("click", () => {
+  chatPanel.classList.remove("open");
+});
+
+sendBtn?.addEventListener("click", sendMessage);
+chatInput?.addEventListener("keydown", e => {
+  if (e.key === "Enter") sendMessage();
 });
 
 

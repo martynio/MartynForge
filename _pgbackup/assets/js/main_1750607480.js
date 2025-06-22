@@ -98,14 +98,19 @@ if (searchForm) {
     });
   });
 
+// === Aurora Mini: Dock czatu ===
+const entryBar = document.getElementById("ai-entry");
+const chatPanel = document.getElementById("aiChatPanel");
+const openBtn = document.getElementById("aiOpenBtn");
+const closeBtn = document.getElementById("aiCloseBtn");
+const chatInput = document.getElementById("aiChatInput");
 const chatBody = document.getElementById("aiChatBody");
-const input = document.getElementById("aiInput");
 const sendBtn = document.getElementById("aiSendBtn");
 
 let chatInitialized = false;
 
-const fakeAIResponse = (text) => {
-  const q = text.toLowerCase();
+const fakeAIResponse = (userText) => {
+  const q = userText.toLowerCase();
   if (q.includes("logo")) return "Logo zazwyczaj od 150€, zależnie od stylu.";
   if (q.includes("strona")) return "Strony zaczynają się od 400€, z pełną responsywnością.";
   return "Chętnie pomogę — napisz więcej!";
@@ -113,16 +118,16 @@ const fakeAIResponse = (text) => {
 
 const addMessage = (text, sender = "user") => {
   const message = document.createElement("div");
-  message.classList.add("chat-message", sender);
-
-  const avatar = document.createElement("img");
-  avatar.classList.add("avatar");
-  avatar.src = sender === "ai" ? "assets/icons/avatar-kuznia.svg" : "assets/icons/avatar-user.svg";
-  avatar.alt = sender === "ai" ? "AI" : "Ty";
+  message.classList.add("chat-message", sender === "ai" ? "ai" : "user");
 
   const bubble = document.createElement("div");
   bubble.classList.add("bubble");
   bubble.textContent = text;
+
+  const avatar = document.createElement("img");
+  avatar.src = sender === "ai" ? "assets/icons/avatar-kuznia.svg" : "assets/icons/avatar-user.svg";
+  avatar.alt = sender === "ai" ? "AI" : "Ty";
+  avatar.classList.add("avatar");
 
   if (sender === "ai") {
     message.appendChild(avatar);
@@ -136,34 +141,50 @@ const addMessage = (text, sender = "user") => {
   chatBody.scrollTop = chatBody.scrollHeight;
 };
 
-const sendMessage = () => {
-  const text = input.value.trim();
-  if (!text) return;
+const openChat = () => {
+  if (!chatPanel) return;
 
-  // Inicjalizacja czatu i rozwinięcie panelu
+  // Inicjalizacja pierwszej wiadomości
   if (!chatInitialized) {
-    chatBody.style.display = "block";
     addMessage("W czym mogę pomóc?", "ai");
     chatInitialized = true;
   }
 
-  addMessage(text, "user");
-  input.value = "";
+  // Usuwamy style inline, jeśli są
+  chatPanel.removeAttribute("style");
 
+  // Dodajemy klasę aktywującą
+  chatPanel.classList.add("open");
+
+  // Scroll delikatny do czatu
   setTimeout(() => {
-    addMessage(fakeAIResponse(text), "ai");
-  }, 500);
+    chatPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 100);
 };
 
-sendBtn.addEventListener("click", sendMessage);
+[entryBar, openBtn].forEach(el => {
+  if (el) el.addEventListener("click", openChat);
+});
 
-input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    chatPanel.classList.remove("open");
+  });
+}
+
+if (sendBtn) {
+  sendBtn.addEventListener("click", sendMessage);
+}
+
+if (chatInput) {
+    chatInput?.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+    e.preventDefault(); // 🚫 zapobiega submitowi formularza
     sendMessage();
   }
 });
 
+}
 
   // === Interaktywne kafelki usług ===
   const serviceCards = document.querySelectorAll('.service-card');

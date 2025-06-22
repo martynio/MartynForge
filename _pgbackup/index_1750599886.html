@@ -80,21 +80,32 @@
                             <h1 class="display-3 fw-normal ">&quot;Incepta tua &mdash; forma nostra.&quot;</h1> 
                             <p class="lead mb-5">Twoje pomysły &mdash; nasza forma.</p> 
                             <form id="search-form"> 
-                                <div class="gx-2 row"> 
-                                    <div class="col-sm mb-3"> 
-                                        <input type="text" class="form-control form-control-lg ps-4 pe-4 rounded-pill" placeholder="What are you looking for?"> 
-                                    </div>                                     
-                                    <div class="col-sm-auto mb-3 text-end"> 
-                                        <button type="submit" class="mf-btn mf-btn-primary" aria-label="Search" role="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="me-1"> 
-                                                <g> 
-                                                    <path fill="none" d="M0 0h24v24H0z"></path>                                                     
-                                                    <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"></path>                                                     
-                                                </g>                                                 
-                                            </svg><span class="align-middle">Search</span>&nbsp;
-                                        </button>                                         
-                                    </div>                                     
-                                </div>                                 
+                                <div id="ai-entry" class="d-flex align-items-center justify-content-between rounded-pill shadow px-3 py-2 bg-white mx-auto mb-4" style="cursor:pointer; max-width: 500px; border: 2px solid #cc5500;">
+                                    <div class="d-flex align-items-center flex-grow-1">
+                                        <img src="assets/icons/avatar-kuznia.svg" alt="Asystent Kuźni" width="28" height="28" class="me-2"><span class="text-muted" style="white-space: nowrap;">Zadaj pytanie...</span>
+                                    </div>
+                                    <button class="btn p-0 ms-2" id="aiOpenBtn" aria-label="Otwórz czat">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#cc5500" width="24" height="24" viewBox="0 0 24 24">
+                                            <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <!-- Aurora Mini: Dock czatu -->
+                                <div id="aiChatPanel" class="rounded shadow mt-3">
+                                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom" style="background: #ffe3cc;">
+                                        <div class="d-flex align-items-center">
+                                            <img src="assets/icons/avatar-kuznia.svg" alt="Aurora" width="24" height="24" class="me-2"><strong>Asystent Kuźni</strong>
+                                        </div>
+                                        <button id="aiCloseBtn" class="btn-close" aria-label="Zamknij"></button>
+                                    </div>
+                                    <div id="aiChatBody" class="px-3 py-2" style="max-height: 260px; overflow-y: auto; font-size: 0.95rem; background: #fffdf7;">
+                                        <!-- Wiadomości będą generowane tutaj przez JS -->
+                                    </div>
+                                    <div class="px-3 py-2 border-top d-flex align-items-center" style="background: #fff8ee;">
+                                        <input type="text" id="aiChatInput" class="form-control form-control-sm me-2" placeholder="Zadaj pytanie...">
+                                        <button id="aiSendBtn" class="btn btn-sm" style="background: #cc5500; color: white;">⮞</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>                         
                     </div>                     
@@ -160,15 +171,17 @@
                         <h2 class="text-dark">Our Services</h2>
                         <p class="text-secondary">Clarity, quality, and speed — these are our standards.</p>
                     </div>
-                    <div class="row justify-content-center">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 align-items-stretch service-row">
                         <!-- Logo Design -->
-                        <div class="col-lg-4 col-sm-6 pb-3 pt-3">
-                            <div class="border p-4 pb-5 pt-5 service-card">
-                                <img src="assets/icons/obraz(4).svg" alt="Logo Design Icon" width="60" class="mb-4">
-                                <h3 class="h5 mb-2 text-dark">Logo Design</h3>
-                                <p class="mb-3">Receive a professional logo tailored to your industry and style, delivered with print and web-ready formats.</p>
-                                <p class="fw-bold text-primary">from 150&nbsp;&euro;</p>
-                                <div class="service-details" style="max-height: 0; opacity: 0; overflow: hidden;">
+                        <div class="col d-flex">
+                            <div class="service-card border p-4 pt-5 pb-4 w-100 d-flex flex-column justify-content-between">
+                                <div class="service-header">
+                                    <img src="assets/icons/obraz(4).svg" alt="Logo Design Icon" width="60" class="mb-4">
+                                    <h3 class="h5 mb-2 text-dark">Logo Design</h3>
+                                    <p class="mb-3">Receive a professional logo tailored to your industry and style, delivered with print and web-ready formats.</p>
+                                    <p class="fw-bold text-primary mt-3">from 150&nbsp;&euro;</p>
+                                </div>
+                                <div class="service-details">
                                     <ul class="mb-0 text-start small text-muted">
                                         <li>✔ Finalne pliki: SVG, PDF, PNG (druk i web)</li>
                                         <li>✔ Pełne prawa do wykorzystania komercyjnego</li>
@@ -179,13 +192,15 @@
                             </div>
                         </div>
                         <!-- Website Development -->
-                        <div class="col-lg-4 col-sm-6 pb-3 pt-3">
-                            <div class="border p-4 pb-5 pt-5 service-card">
-                                <img src="assets/icons/obraz.svg" alt="Website Icon" width="60" class="mb-4">
-                                <h3 class="h5 mb-2 text-dark">Website Development</h3>
-                                <p class="mb-3">We create modern, responsive websites with or without CMS. From design to deployment — we've got it covered.</p>
-                                <p class="fw-bold text-primary">from 400&nbsp;&euro;</p>
-                                <div class="service-details" style="max-height: 0; opacity: 0; overflow: hidden;">
+                        <div class="col d-flex">
+                            <div class="service-card border p-4 pt-5 pb-4 w-100 d-flex flex-column justify-content-between">
+                                <div class="service-header">
+                                    <img src="assets/icons/obraz.svg" alt="Website Icon" width="60" class="mb-4">
+                                    <h3 class="h5 mb-2 text-dark">Website Development</h3>
+                                    <p class="mb-3">We create modern, responsive websites with or without CMS. From design to deployment — we've got it covered.</p>
+                                    <p class="fw-bold text-primary mt-3">from 400&nbsp;&euro;</p>
+                                </div>
+                                <div class="service-details">
                                     <ul class="mb-0 text-start small text-muted">
                                         <li>✔ Strona gotowa do publikacji (HTML/CSS/JS)</li>
                                         <li>✔ Możliwość integracji z CMS lub statycznie</li>
@@ -195,14 +210,16 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Technical Support -->
-                        <div class="col-lg-4 col-sm-6 pb-3 pt-3">
-                            <div class="border p-4 pb-5 pt-5 service-card">
-                                <img src="assets/icons/obraz(2).svg" alt="Support Icon" width="60" class="mb-4">
-                                <h3 class="h5 mb-2 text-dark">Tech Support & Adjustments</h3>
-                                <p class="mb-3">Quick updates, troubleshooting, and content edits without unnecessary delays or costs.</p>
-                                <p class="fw-bold text-primary">from 25&nbsp;&euro;&nbsp;/&nbsp;hour</p>
-                                <div class="service-details" style="max-height: 0; opacity: 0; overflow: hidden;">
+                        <!-- Tech Support -->
+                        <div class="col d-flex">
+                            <div class="service-card border p-4 pt-5 pb-4 w-100 d-flex flex-column justify-content-between">
+                                <div class="service-header">
+                                    <img src="assets/icons/obraz(2).svg" alt="Support Icon" width="60" class="mb-4">
+                                    <h3 class="h5 mb-2 text-dark">Tech Support & Adjustments</h3>
+                                    <p class="mb-3">Quick updates, troubleshooting, and content edits without unnecessary delays or costs.</p>
+                                    <p class="fw-bold text-primary mt-3">from 25&nbsp;&euro;&nbsp;/&nbsp;hour</p>
+                                </div>
+                                <div class="service-details">
                                     <ul class="mb-0 text-start small text-muted">
                                         <li>✔ Poprawki wizualne i tekstowe</li>
                                         <li>✔ Szybka reakcja – zazwyczaj &lt; 24h</li>

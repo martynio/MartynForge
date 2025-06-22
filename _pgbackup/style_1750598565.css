@@ -153,83 +153,89 @@ header.fixed-top {
     font-size: 1.4rem;
 }
 
-/* === Aurora Mini: Styl czatu w linii === */
-#aiChatBody {
-    display: none;
+/* === AI Widget === */
+.ai-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    max-height: 500px;
+    background: #1e1e2f;
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    font-family: sans-serif;
+}
 
-    /* ukryte przed pierwszym użyciem */
-    margin-top: 10px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 14px;
-    background: #fff8ee;
-    border: 2px solid #cc5500;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    max-height: 280px;
+.ai-widget.hidden {
+    display: none;
+}
+
+.ai-widget-header {
+    padding: 10px;
+    background: #2d2d40;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.ai-widget-header button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.ai-widget-body {
+    flex: 1;
+    padding: 10px;
     overflow-y: auto;
 }
 
-/* Wiadomości */
-.chat-message {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-.chat-message.ai {
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.chat-message.user {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-}
-
-.chat-message .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-
-.bubble {
-    padding: 10px 16px;
-    font-size: 0.95rem;
+.ai-bubble {
+    padding: 8px 12px;
+    margin: 6px 0;
+    border-radius: 10px;
+    max-width: 80%;
     line-height: 1.4;
-    border-radius: 18px;
-    max-width: 75%;
-    word-wrap: break-word;
-    overflow-wrap: anywhere;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.chat-message.ai .bubble {
-    background-color: #ffa726;
-    color: white;
-    border-top-left-radius: 4px;
+.ai-bubble.ai {
+    background: #333;
+    align-self: flex-start;
 }
 
-.chat-message.user .bubble {
-    background-color: #ffffff;
-    color: #333;
-    border-top-right-radius: 4px;
+.ai-bubble.user {
+    background: #007bff;
+    align-self: flex-end;
 }
 
-/* Pasek interaktywny (na górze) */
-#ai-entry {
-    transition: all 0.3s ease;
+#ai-form {
+    display: flex;
+    border-top: 1px solid #444;
 }
 
-#aiInput {
+#ai-input {
+    flex: 1;
+    padding: 8px;
     border: none;
     outline: none;
-    background: transparent;
-    font-size: 1rem;
+    background: #2d2d40;
+    color: white;
+}
+
+#ai-form button {
+    background: #007bff;
+    border: none;
+    color: white;
+    padding: 0 12px;
+    cursor: pointer;
 }
 
 /* === Service Cards: Interactivity & Visual === */
