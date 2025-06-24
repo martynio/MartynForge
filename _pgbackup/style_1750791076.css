@@ -157,7 +157,8 @@ header.fixed-top {
 .chat-panel {
     display: none;
     max-width: 500px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     padding: 14px;
     border: 2px solid #cc5500;
     border-radius: 16px;
@@ -167,18 +168,21 @@ header.fixed-top {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
-    background: #fff;
+    background: transparent;
+
+    /* domyślnie przezroczysty */
 }
 
-.chat-panel.visible {
-    display: block;
+#aiChatBody.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* MOBILE (opcjonalnie lżejszy wygląd) */
+/* MOBILE: bez marginesu i paddingu, pełna szerokość */
 @media (max-width: 767px) {
-    .chat-panel {
+    #aiChatBody {
+        margin-left: 0;
+        margin-right: 0;
         border: none;
         box-shadow: none;
         padding-left: 0;
@@ -235,7 +239,7 @@ header.fixed-top {
     border-top-right-radius: 4px;
 }
 
-/* Input */
+/* Pasek wejściowy */
 #aiInput {
     border: none;
     outline: none;
@@ -250,19 +254,6 @@ header.fixed-top {
 
 #aiInput:focus::placeholder {
     color: transparent;
-}
-
-.chat-panel {
-    display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.chat-panel.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* === Service Cards: Interactivity & Visual === */

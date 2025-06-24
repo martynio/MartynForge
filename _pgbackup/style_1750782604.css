@@ -154,115 +154,68 @@ header.fixed-top {
 }
 
 /* === Aurora Mini: Styl czatu === */
-.chat-panel {
-    display: none;
+/* === Aurora Mini: Styl czatu === */
+#ai-chat-wrapper {
     max-width: 500px;
+    width: 100%;
     margin: 0 auto;
-    padding: 14px;
+    transition: transform 0.5s ease;
+    position: relative;
+}
+
+@media (min-width: 992px) {
+    #ai-chat-wrapper.shifted {
+        transform: translateX(200px);
+    }
+}
+
+#aiChatBody {
+    display: none;
+    background: #fffdf7;
     border: 2px solid #cc5500;
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    max-height: 280px;
+    max-height: 300px;
     overflow-y: auto;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    background: #fff;
-}
-
-.chat-panel.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* MOBILE (opcjonalnie lżejszy wygląd) */
-@media (max-width: 767px) {
-    .chat-panel {
-        border: none;
-        box-shadow: none;
-        padding-left: 0;
-        padding-right: 0;
-    }
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 /* Wiadomości */
 .chat-message {
     display: flex;
-    align-items: flex-end;
     gap: 10px;
     margin-bottom: 12px;
 }
 
 .chat-message.ai {
     flex-direction: row;
-    justify-content: flex-start;
 }
 
 .chat-message.user {
     flex-direction: row-reverse;
-    justify-content: flex-end;
 }
 
 .chat-message .avatar {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .bubble {
     padding: 10px 16px;
     font-size: 0.95rem;
-    line-height: 1.4;
     border-radius: 18px;
     max-width: 75%;
     word-wrap: break-word;
-    overflow-wrap: anywhere;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .chat-message.ai .bubble {
     background-color: #ffa726;
     color: white;
-    border-top-left-radius: 4px;
 }
 
 .chat-message.user .bubble {
     background-color: #ffffff;
     color: #333;
-    border-top-right-radius: 4px;
-}
-
-/* Input */
-#aiInput {
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 1rem;
-}
-
-#aiInput::placeholder {
-    color: #999;
-    transition: color 0.3s ease;
-}
-
-#aiInput:focus::placeholder {
-    color: transparent;
-}
-
-.chat-panel {
-    display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.chat-panel.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* === Service Cards: Interactivity & Visual === */

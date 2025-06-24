@@ -76,12 +76,12 @@
             <section id="Home" class="background-cover bg-dark pb-5 position-relative pt-5 text-white" style="background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');">
                 <div class="container mt-5 pb-5 pt-5">
                     <div class="pb-5 pt-5 row">
-                        <!-- LEWA kolumna: hasło + input + czat (mobile) -->
                         <div class="col-lg-7 col-xl-6 col-xxl-5 pb-5 pt-5">
                             <h1 class="display-3 fw-normal">"Incepta tua — forma nostra."</h1>
                             <p class="lead mb-5">Twoje pomysły — nasza forma.</p>
-                            <!-- Wrapper z inputem -->
-                            <div id="ai-chat-wrapper" class="mx-auto mb-4" style="max-width: 500px;">
+                            <!-- Aurora Mini – Pasek i czat -->
+                            <div id="ai-chat-wrapper" style="max-width: 500px;" class="mx-auto mb-4">
+                                <!-- Pasek wpisywania i przycisk -->
                                 <div class="d-flex align-items-center rounded-pill shadow px-3 py-2 bg-white" style="border: 2px solid #cc5500;">
                                     <img src="assets/icons/avatar-kuznia.svg" alt="Asystent Kuźni" width="28" height="28" class="me-2">
                                     <input type="text" id="aiInput" class="form-control border-0 shadow-none" placeholder="Zadaj pytanie…" style="flex: 1;">
@@ -91,16 +91,11 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <!-- czat mobilny -->
-                                <div id="ai-chat-below">
-                                    <div id="aiChatBodyMobile" class="chat-panel mobile px-2 py-3 mt-2"></div>
+                                <!-- Panel wiadomości -->
+                                <div id="aiChatBody" class="px-2 py-3 mt-2" style="background: #fffdf7; border: 2px solid #cc5500; border-radius: 16px;
+              display: none; max-height: 300px; overflow-y: auto;">
+                                    <!-- JS będzie tu dodawać wiadomości -->
                                 </div>
-                            </div>
-                        </div>
-                        <!-- PRAWA kolumna: czat desktop -->
-                        <div class="col-lg-5 col-xl-6 col-xxl-7 pb-5 pt-5 d-none d-lg-block">
-                            <div class="mx-auto" style="max-width: 500px;">
-                                <div id="aiChatBodyDesktop" class="chat-panel desktop px-2 py-3 mt-2"></div>
                             </div>
                         </div>
                     </div>
@@ -373,7 +368,7 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                         </div>                         
                     </div>                     
                 </div>                 
-            </section>
+            </section>             
         </main>         
         <footer class="bg-dark pt-5 text-secondary"> 
             <div class="container"> 

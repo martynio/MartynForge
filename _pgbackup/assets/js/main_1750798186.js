@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function () {
     btn.addEventListener('mouseleave', () => btn.style.transform = 'scale(1)');
   });
 
-//Chat
 const input = document.getElementById("aiInput");
 const sendBtn = document.getElementById("aiSendBtn");
 
@@ -89,7 +88,6 @@ const mobileChat = document.getElementById("aiChatBodyMobile");
 const desktopChat = document.getElementById("aiChatBodyDesktop");
 
 let chatInitialized = false;
-let chatActivated = false;
 const messages = [];
 
 const fakeAIResponse = (text) => {
@@ -130,6 +128,8 @@ const renderMessages = () => {
   [mobileChat, desktopChat].forEach(panel => {
     if (!panel) return;
     panel.innerHTML = "";
+    panel.classList.add("visible");
+
     messages.forEach(({ text, sender }) => {
       const message = document.createElement("div");
       message.classList.add("chat-message", sender);
@@ -153,44 +153,31 @@ const renderMessages = () => {
 
       panel.appendChild(message);
     });
+
     panel.scrollTop = panel.scrollHeight;
   });
-};
-
-const activateChat = () => {
-  if (chatActivated) return;
-  chatActivated = true;
-
-  // Pokaż panele
-  [mobileChat, desktopChat].forEach(panel => {
-    if (panel) panel.classList.add("visible");
-  });
-
-  // Dodaj typing dots
-  addTypingIndicator();
-
-  setTimeout(() => {
-    removeTypingIndicator();
-    messages.push({ text: "W czym mogę pomóc?", sender: "ai" });
-    chatInitialized = true;
-    renderMessages();
-  }, 1200);
 };
 
 const sendMessage = () => {
   const text = input.value.trim();
   if (!text) return;
 
+  if (!chatInitialized) {
+    messages.push({ text: "W czym mogę pomóc?", sender: "ai" });
+    chatInitialized = true;
+  }
+
   messages.push({ text, sender: "user" });
   renderMessages();
   input.value = "";
 
+  // AI typing simulation
   addTypingIndicator();
   setTimeout(() => {
     removeTypingIndicator();
     messages.push({ text: fakeAIResponse(text), sender: "ai" });
     renderMessages();
-  }, 1200);
+  }, 1200); // typing delay
 };
 
 if (sendBtn && input) {
@@ -201,12 +188,7 @@ if (sendBtn && input) {
       sendMessage();
     }
   });
-
-  input.addEventListener("focus", activateChat);
 }
-
-
-
 
 
 

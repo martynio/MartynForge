@@ -167,7 +167,7 @@ header.fixed-top {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
-    background: #fff;
+    background: #fff8ee;
 }
 
 .chat-panel.visible {
@@ -250,19 +250,6 @@ header.fixed-top {
 
 #aiInput:focus::placeholder {
     color: transparent;
-}
-
-.chat-panel {
-    display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.chat-panel.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* === Service Cards: Interactivity & Visual === */

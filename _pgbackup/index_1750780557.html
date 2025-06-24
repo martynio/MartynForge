@@ -73,35 +73,28 @@
             </nav>             
         </header>         
         <main> 
-            <section id="Home" class="background-cover bg-dark pb-5 position-relative pt-5 text-white" style="background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');">
-                <div class="container mt-5 pb-5 pt-5">
-                    <div class="pb-5 pt-5 row">
-                        <!-- LEWA kolumna: hasło + input + czat (mobile) -->
-                        <div class="col-lg-7 col-xl-6 col-xxl-5 pb-5 pt-5">
+            <section id="Home" class="background-cover bg-dark pb-5 position-relative pt-5 text-white" style="background-image: url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');">
+                <div class="container mt-5 pb-3 pt-5">
+                    <div class="row align-items-start">
+                        <div class="col-lg-7 col-xl-6 col-xxl-5 pb-4 pt-5">
                             <h1 class="display-3 fw-normal">"Incepta tua — forma nostra."</h1>
-                            <p class="lead mb-5">Twoje pomysły — nasza forma.</p>
-                            <!-- Wrapper z inputem -->
-                            <div id="ai-chat-wrapper" class="mx-auto mb-4" style="max-width: 500px;">
-                                <div class="d-flex align-items-center rounded-pill shadow px-3 py-2 bg-white" style="border: 2px solid #cc5500;">
-                                    <img src="assets/icons/avatar-kuznia.svg" alt="Asystent Kuźni" width="28" height="28" class="me-2">
-                                    <input type="text" id="aiInput" class="form-control border-0 shadow-none" placeholder="Zadaj pytanie…" style="flex: 1;">
-                                    <button id="aiSendBtn" class="btn p-0 ms-2" aria-label="Wyślij" style="background: none; border: none;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#cc5500" width="24" height="24" viewBox="0 0 24 24">
-                                            <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                                <!-- czat mobilny -->
-                                <div id="ai-chat-below">
-                                    <div id="aiChatBodyMobile" class="chat-panel mobile px-2 py-3 mt-2"></div>
-                                </div>
-                            </div>
+                            <p class="lead mb-4">Twoje pomysły — nasza forma.</p>
                         </div>
-                        <!-- PRAWA kolumna: czat desktop -->
-                        <div class="col-lg-5 col-xl-6 col-xxl-7 pb-5 pt-5 d-none d-lg-block">
-                            <div class="mx-auto" style="max-width: 500px;">
-                                <div id="aiChatBodyDesktop" class="chat-panel desktop px-2 py-3 mt-2"></div>
-                            </div>
+                    </div>
+                    <!-- Czat NIE jest już wewnątrz .row/.col -->
+                    <div id="ai-chat-wrapper" class="mx-auto" style="max-width: 500px;">
+                        <div class="d-flex align-items-center rounded-pill shadow px-3 py-2 bg-white" style="border: 2px solid #cc5500;">
+                            <img src="assets/icons/avatar-kuznia.svg" alt="Asystent Kuźni" width="28" height="28" class="me-2">
+                            <input type="text" id="aiInput" class="form-control border-0 shadow-none" placeholder="Zadaj pytanie…" style="flex: 1;">
+                            <button id="aiSendBtn" class="btn p-0 ms-2" aria-label="Wyślij" style="background: none; border: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#cc5500" width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="aiChatBody" class="px-2 py-3 mt-2" style="background: #fffdf7; border: 2px solid #cc5500; border-radius: 16px;
+                  display: none; max-height: 300px; overflow-y: auto;">
+                            <!-- JS doda tu wiadomości -->
                         </div>
                     </div>
                 </div>
@@ -110,15 +103,20 @@
                 <div class="container "> 
                     <div class="bg-white p-3 rounded-3 shadow-sm"> 
                         <div class="justify-content-center g-0 row"> 
-                            <div class="col-4 col-lg-2"><a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><img alt="Webdesign Icon" width="59" height="62" src="assets/icons/obraz.svg"><h2 class="fw-normal h6 mb-1 text-black-50">Modern Websites</h2></a> 
+                            <div class="col-4 col-lg-2">
+                                <a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><img alt="Webdesign Icon" width="59" height="62" src="assets/icons/obraz.svg"><h2 class="fw-normal h6 mb-1 text-black-50">Modern Websites</h2></a> 
                             </div>                             
-                            <div class="col-4 col-lg-2"><a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(5).svg" alt="Webdesign Icon" width="104" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Your Style, Your Logo</h2> </a> 
+                            <div class="col-4 col-lg-2">
+                                <a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(5).svg" alt="Webdesign Icon" width="104" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Your Style, Your Logo</h2> </a> 
                             </div>                             
-                            <div class="col-4 col-lg-2"><a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(2).svg" alt="Webdesign Icon" width="60" height="60"> <h2 class="fw-normal h6 mb-1 text-black-50">Stress-Free Support</h2></a> 
+                            <div class="col-4 col-lg-2">
+                                <a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(2).svg" alt="Webdesign Icon" width="60" height="60"> <h2 class="fw-normal h6 mb-1 text-black-50">Stress-Free Support</h2></a> 
                             </div>                             
-                            <div class="col-4 col-lg-2"><a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(3).svg" alt="Webdesign Icon" width="60" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Ask Us Anything</h2> </a> 
+                            <div class="col-4 col-lg-2">
+                                <a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(3).svg" alt="Webdesign Icon" width="60" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Ask Us Anything</h2> </a> 
                             </div>                             
-                            <div class="col-4 col-lg-2"><a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(4).svg" alt="Webdesign Icon" width="60" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Increase Visibility</h2> </a> 
+                            <div class="col-4 col-lg-2">
+                                <a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(4).svg" alt="Webdesign Icon" width="60" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Increase Visibility</h2> </a> 
                             </div>                             
                         </div>                         
                     </div>                     

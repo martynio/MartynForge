@@ -130,6 +130,8 @@ const renderMessages = () => {
   [mobileChat, desktopChat].forEach(panel => {
     if (!panel) return;
     panel.innerHTML = "";
+    panel.classList.add("visible");
+
     messages.forEach(({ text, sender }) => {
       const message = document.createElement("div");
       message.classList.add("chat-message", sender);
@@ -153,28 +155,9 @@ const renderMessages = () => {
 
       panel.appendChild(message);
     });
+
     panel.scrollTop = panel.scrollHeight;
   });
-};
-
-const activateChat = () => {
-  if (chatActivated) return;
-  chatActivated = true;
-
-  // Pokaż panele
-  [mobileChat, desktopChat].forEach(panel => {
-    if (panel) panel.classList.add("visible");
-  });
-
-  // Dodaj typing dots
-  addTypingIndicator();
-
-  setTimeout(() => {
-    removeTypingIndicator();
-    messages.push({ text: "W czym mogę pomóc?", sender: "ai" });
-    chatInitialized = true;
-    renderMessages();
-  }, 1200);
 };
 
 const sendMessage = () => {
@@ -193,6 +176,26 @@ const sendMessage = () => {
   }, 1200);
 };
 
+// === Pojawienie się czatu z opóźnionym przywitaniem ===
+const activateChat = () => {
+  if (chatActivated) return;
+  chatActivated = true;
+
+  // Fade-in styl
+  [mobileChat, desktopChat].forEach(panel => {
+    if (!panel) return;
+    panel.classList.add("visible");
+  });
+
+  setTimeout(() => {
+    if (!chatInitialized) {
+      messages.push({ text: "W czym mogę pomóc?", sender: "ai" });
+      renderMessages();
+      chatInitialized = true;
+    }
+  }, 600); // opóźnienie zanim AI się przywita
+};
+
 if (sendBtn && input) {
   sendBtn.addEventListener("click", sendMessage);
   input.addEventListener("keydown", (e) => {
@@ -204,8 +207,6 @@ if (sendBtn && input) {
 
   input.addEventListener("focus", activateChat);
 }
-
-
 
 
 

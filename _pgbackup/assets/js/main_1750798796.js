@@ -75,138 +75,131 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // === Animacje kliknięcia dla mf-btn ===
-  document.querySelectorAll('.mf-btn').forEach(btn => {
-    btn.addEventListener('mousedown', () => btn.style.transform = 'scale(0.97)');
-    btn.addEventListener('mouseup', () => btn.style.transform = 'scale(1)');
-    btn.addEventListener('mouseleave', () => btn.style.transform = 'scale(1)');
-  });
+document.addEventListener('DOMContentLoaded', function () {
+  const input = document.getElementById("aiInput");
+  const sendBtn = document.getElementById("aiSendBtn");
 
-//Chat
-const input = document.getElementById("aiInput");
-const sendBtn = document.getElementById("aiSendBtn");
+  const mobileChat = document.getElementById("aiChatBodyMobile");
+  const desktopChat = document.getElementById("aiChatBodyDesktop");
 
-const mobileChat = document.getElementById("aiChatBodyMobile");
-const desktopChat = document.getElementById("aiChatBodyDesktop");
+  let chatInitialized = false;
+  let chatActivated = false;
+  const messages = [];
 
-let chatInitialized = false;
-let chatActivated = false;
-const messages = [];
+  const fakeAIResponse = (text) => {
+    const q = text.toLowerCase();
+    if (q.includes("logo")) return "Logo zazwyczaj od 150€, zależnie od stylu.";
+    if (q.includes("strona")) return "Strony zaczynają się od 400€, z pełną responsywnością.";
+    return "Chętnie pomogę — napisz więcej!";
+  };
 
-const fakeAIResponse = (text) => {
-  const q = text.toLowerCase();
-  if (q.includes("logo")) return "Logo zazwyczaj od 150€, zależnie od stylu.";
-  if (q.includes("strona")) return "Strony zaczynają się od 400€, z pełną responsywnością.";
-  return "Chętnie pomogę — napisz więcej!";
-};
-
-const addTypingIndicator = () => {
-  [mobileChat, desktopChat].forEach(panel => {
-    if (!panel) return;
-    const typing = document.createElement("div");
-    typing.classList.add("chat-message", "ai", "typing");
-    typing.id = "typing-indicator";
-
-    const avatar = document.createElement("img");
-    avatar.classList.add("avatar");
-    avatar.src = "assets/icons/avatar-kuznia.svg";
-    avatar.alt = "AI";
-
-    const bubble = document.createElement("div");
-    bubble.classList.add("bubble");
-    bubble.innerHTML = '<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>';
-
-    typing.appendChild(avatar);
-    typing.appendChild(bubble);
-    panel.appendChild(typing);
-    panel.scrollTop = panel.scrollHeight;
-  });
-};
-
-const removeTypingIndicator = () => {
-  document.querySelectorAll('#typing-indicator').forEach(el => el.remove());
-};
-
-const renderMessages = () => {
-  [mobileChat, desktopChat].forEach(panel => {
-    if (!panel) return;
-    panel.innerHTML = "";
-    messages.forEach(({ text, sender }) => {
-      const message = document.createElement("div");
-      message.classList.add("chat-message", sender);
+  const addTypingIndicator = () => {
+    [mobileChat, desktopChat].forEach(panel => {
+      if (!panel) return;
+      const typing = document.createElement("div");
+      typing.classList.add("chat-message", "ai", "typing");
+      typing.id = "typing-indicator";
 
       const avatar = document.createElement("img");
       avatar.classList.add("avatar");
-      avatar.src = sender === "ai" ? "assets/icons/avatar-kuznia.svg" : "assets/icons/avatar-user.svg";
-      avatar.alt = sender === "ai" ? "AI" : "Ty";
+      avatar.src = "assets/icons/avatar-kuznia.svg";
+      avatar.alt = "AI";
 
       const bubble = document.createElement("div");
       bubble.classList.add("bubble");
-      bubble.textContent = text;
+      bubble.innerHTML = '<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>';
 
-      if (sender === "ai") {
-        message.appendChild(avatar);
-        message.appendChild(bubble);
-      } else {
-        message.appendChild(bubble);
-        message.appendChild(avatar);
-      }
-
-      panel.appendChild(message);
+      typing.appendChild(avatar);
+      typing.appendChild(bubble);
+      panel.appendChild(typing);
+      panel.scrollTop = panel.scrollHeight;
     });
-    panel.scrollTop = panel.scrollHeight;
-  });
-};
+  };
 
-const activateChat = () => {
-  if (chatActivated) return;
-  chatActivated = true;
+  const removeTypingIndicator = () => {
+    document.querySelectorAll('#typing-indicator').forEach(el => el.remove());
+  };
 
-  // Pokaż panele
-  [mobileChat, desktopChat].forEach(panel => {
-    if (panel) panel.classList.add("visible");
-  });
+  const renderMessages = () => {
+    [mobileChat, desktopChat].forEach(panel => {
+      if (!panel) return;
+      panel.innerHTML = "";
+      panel.classList.add("visible");
 
-  // Dodaj typing dots
-  addTypingIndicator();
+      messages.forEach(({ text, sender }) => {
+        const message = document.createElement("div");
+        message.classList.add("chat-message", sender);
 
-  setTimeout(() => {
-    removeTypingIndicator();
-    messages.push({ text: "W czym mogę pomóc?", sender: "ai" });
-    chatInitialized = true;
+        const avatar = document.createElement("img");
+        avatar.classList.add("avatar");
+        avatar.src = sender === "ai" ? "assets/icons/avatar-kuznia.svg" : "assets/icons/avatar-user.svg";
+        avatar.alt = sender === "ai" ? "AI" : "Ty";
+
+        const bubble = document.createElement("div");
+        bubble.classList.add("bubble");
+        bubble.textContent = text;
+
+        if (sender === "ai") {
+          message.appendChild(avatar);
+          message.appendChild(bubble);
+        } else {
+          message.appendChild(bubble);
+          message.appendChild(avatar);
+        }
+
+        panel.appendChild(message);
+      });
+
+      panel.scrollTop = panel.scrollHeight;
+    });
+  };
+
+  const sendMessage = () => {
+    const text = input.value.trim();
+    if (!text) return;
+
+    messages.push({ text, sender: "user" });
     renderMessages();
-  }, 1200);
-};
+    input.value = "";
 
-const sendMessage = () => {
-  const text = input.value.trim();
-  if (!text) return;
+    addTypingIndicator();
+    setTimeout(() => {
+      removeTypingIndicator();
+      messages.push({ text: fakeAIResponse(text), sender: "ai" });
+      renderMessages();
+    }, 1000);
+  };
 
-  messages.push({ text, sender: "user" });
-  renderMessages();
-  input.value = "";
+  if (sendBtn && input) {
+    sendBtn.addEventListener("click", sendMessage);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
 
-  addTypingIndicator();
-  setTimeout(() => {
-    removeTypingIndicator();
-    messages.push({ text: fakeAIResponse(text), sender: "ai" });
-    renderMessages();
-  }, 1200);
-};
+    // === Aktywacja czatu po kliknięciu inputa ===
+    input.addEventListener("mousedown", () => {
+      if (chatActivated) return;
+      chatActivated = true;
 
-if (sendBtn && input) {
-  sendBtn.addEventListener("click", sendMessage);
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
+      setTimeout(() => {
+        [mobileChat, desktopChat].forEach(panel => {
+          if (panel) panel.classList.add("visible");
+        });
 
-  input.addEventListener("focus", activateChat);
-}
-
-
-
+        setTimeout(() => {
+          if (!chatInitialized) {
+            messages.push({ text: "W czym mogę pomóc?", sender: "ai" });
+            renderMessages();
+            chatInitialized = true;
+          }
+        }, 400); // Delay dla animacji fade-in
+      }, 200); // Delay przed pojawieniem się samego panelu
+    });
+  }
+});
 
 
 

@@ -153,37 +153,33 @@ header.fixed-top {
     font-size: 1.4rem;
 }
 
-/* === Aurora Mini: Styl czatu === */
-.chat-panel {
-    display: none;
+/* === Aurora Mini: Styl czatu w linii === */
+#ai-chat-wrapper {
     max-width: 500px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.5s ease, margin 0.5s ease;
+}
+
+/* Po aktywacji — przesunięcie tylko na desktopie */
+@media (min-width: 992px) {
+    #ai-chat-wrapper.shifted {
+        transform: translateX(200px);
+
+        /* lub więcej */
+    }
+}
+
+#aiChatBody {
+    display: none;
+    margin-top: 10px;
     padding: 14px;
+    background: #fff8ee;
     border: 2px solid #cc5500;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     max-height: 280px;
     overflow-y: auto;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    background: #fff;
-}
-
-.chat-panel.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* MOBILE (opcjonalnie lżejszy wygląd) */
-@media (max-width: 767px) {
-    .chat-panel {
-        border: none;
-        box-shadow: none;
-        padding-left: 0;
-        padding-right: 0;
-    }
 }
 
 /* Wiadomości */
@@ -235,7 +231,7 @@ header.fixed-top {
     border-top-right-radius: 4px;
 }
 
-/* Input */
+/* Pasek wpisywania */
 #aiInput {
     border: none;
     outline: none;
@@ -245,24 +241,6 @@ header.fixed-top {
 
 #aiInput::placeholder {
     color: #999;
-    transition: color 0.3s ease;
-}
-
-#aiInput:focus::placeholder {
-    color: transparent;
-}
-
-.chat-panel {
-    display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.chat-panel.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* === Service Cards: Interactivity & Visual === */
@@ -310,4 +288,5 @@ header.fixed-top {
 
 .service-card {
     flex-grow: 1;
+}
 }

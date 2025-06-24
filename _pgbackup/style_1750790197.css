@@ -154,11 +154,35 @@ header.fixed-top {
 }
 
 /* === Aurora Mini: Styl czatu === */
+/* ==== Układ sekcji czatu: desktop vs mobile ==== */
+#ai-chat-right {
+    display: block;
+}
+
+#ai-chat-below {
+    display: none;
+}
+
+/* MOBILE – czat pod inputem */
+@media (max-width: 991px) {
+    #ai-chat-right {
+        display: none !important;
+    }
+
+    #ai-chat-below {
+        display: block !important;
+    }
+}
+
+/* ==== Uniwersalne ciało czatu ==== */
 .chat-panel {
     display: none;
+    margin-top: 10px;
     max-width: 500px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     padding: 14px;
+    background: #fff8ee;
     border: 2px solid #cc5500;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -167,7 +191,6 @@ header.fixed-top {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
-    background: #fff;
 }
 
 .chat-panel.visible {
@@ -176,17 +199,7 @@ header.fixed-top {
     transform: translateY(0);
 }
 
-/* MOBILE (opcjonalnie lżejszy wygląd) */
-@media (max-width: 767px) {
-    .chat-panel {
-        border: none;
-        box-shadow: none;
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
-
-/* Wiadomości */
+/* ==== Wiadomości czatu ==== */
 .chat-message {
     display: flex;
     align-items: flex-end;
@@ -235,7 +248,7 @@ header.fixed-top {
     border-top-right-radius: 4px;
 }
 
-/* Input */
+/* ==== Pasek wejściowy inputa ==== */
 #aiInput {
     border: none;
     outline: none;
@@ -250,19 +263,6 @@ header.fixed-top {
 
 #aiInput:focus::placeholder {
     color: transparent;
-}
-
-.chat-panel {
-    display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.chat-panel.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* === Service Cards: Interactivity & Visual === */
