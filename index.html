@@ -17,7 +17,11 @@
     <body class="text-black-50"> 
         <header style="background-color: rgba(255, 255, 255, 0.6);" class="fixed-top"> 
             <div class="language-bar bg-white bg-opacity-75 border-bottom py-1 small">
-                <div class="container d-flex justify-content-end align-items-center"><span class="me-2 text-muted">Język:</span><a href="/" class="mx-1 text-decoration-none text-dark" title="Polski"> <img src="assets/flags/pl.svg" alt="Polski" width="20" height="14" style="vertical-align: middle;"> </a><a href="/en/" class="mx-1 text-decoration-none text-dark" title="English"> <img src="assets/flags/en.svg" alt="English" width="20" height="14" style="vertical-align: middle;"> </a><a href="/nl/" class="mx-1 text-decoration-none text-dark" title="Nederlands"> <img src="assets/flags/nl.svg" alt="Nederlands" width="20" height="14" style="vertical-align: middle;"> </a>
+                <div class="container d-flex justify-content-end align-items-center">
+                    <span class="me-2 text-muted">Język:</span>
+                    <a href="/" class="mx-1 text-decoration-none text-dark" title="Polski"> <img src="assets/flags/pl.svg" alt="Polski" width="20" height="14" style="vertical-align: middle;"> </a>
+                    <a href="/en/" class="mx-1 text-decoration-none text-dark" title="English"> <img src="assets/flags/en.svg" alt="English" width="20" height="14" style="vertical-align: middle;"> </a>
+                    <a href="/nl/" class="mx-1 text-decoration-none text-dark" title="Nederlands"> <img src="assets/flags/nl.svg" alt="Nederlands" width="20" height="14" style="vertical-align: middle;"> </a>
                 </div>
             </div>
             <nav class="border-bottom navbar navbar-expand-lg navbar-light pb-lg-0 pt-lg-0"> 
@@ -75,12 +79,12 @@
         <main> 
             <section id="Home" class="background-cover bg-dark pb-5 position-relative pt-5 text-white" style="background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');">
                 <div class="container mt-5 pb-5 pt-5">
-                    <div class="pb-5 pt-5 row">
+                    <div class="pb-5 pt-5 row align-items-start">
                         <!-- LEWA kolumna: hasło + input + czat (mobile) -->
                         <div class="col-lg-7 col-xl-6 col-xxl-5 pb-5 pt-5">
                             <h1 class="display-3 fw-normal">"Incepta tua — forma nostra."</h1>
                             <p class="lead mb-5">Twoje pomysły — nasza forma.</p>
-                            <!-- Wrapper z inputem -->
+                            <!-- Input czatu -->
                             <div id="ai-chat-wrapper" class="mx-auto mb-4" style="max-width: 500px;">
                                 <div class="d-flex align-items-center rounded-pill shadow px-3 py-2 bg-white" style="border: 2px solid #cc5500;">
                                     <img src="assets/icons/avatar-kuznia.svg" alt="Asystent Kuźni" width="28" height="28" class="me-2">
@@ -91,16 +95,16 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <!-- czat mobilny -->
-                                <div id="ai-chat-below">
-                                    <div id="aiChatBodyMobile" class="chat-panel mobile px-2 py-3 mt-2"></div>
-                                </div>
+                            </div>
+                            <!-- Czat (mobile) -->
+                            <div class="d-block d-lg-none">
+                                <div id="aiChatBodyMobile" class="chat-panel px-2 py-3 mt-2"></div>
                             </div>
                         </div>
-                        <!-- PRAWA kolumna: czat desktop -->
+                        <!-- PRAWA kolumna – czat (desktop) -->
                         <div class="col-lg-5 col-xl-6 col-xxl-7 pb-5 pt-5 d-none d-lg-block">
                             <div class="mx-auto" style="max-width: 500px;">
-                                <div id="aiChatBodyDesktop" class="chat-panel desktop px-2 py-3 mt-2"></div>
+                                <div id="aiChatBodyDesktop" class="chat-panel px-2 py-3 mt-2"></div>
                             </div>
                         </div>
                     </div>
@@ -110,15 +114,20 @@
                 <div class="container "> 
                     <div class="bg-white p-3 rounded-3 shadow-sm"> 
                         <div class="justify-content-center g-0 row"> 
-                            <div class="col-4 col-lg-2"><a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><img alt="Webdesign Icon" width="59" height="62" src="assets/icons/obraz.svg"><h2 class="fw-normal h6 mb-1 text-black-50">Modern Websites</h2></a> 
+                            <div class="col-4 col-lg-2">
+                                <a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><img alt="Webdesign Icon" width="59" height="62" src="assets/icons/obraz.svg"><h2 class="fw-normal h6 mb-1 text-black-50">Modern Websites</h2></a> 
                             </div>                             
-                            <div class="col-4 col-lg-2"><a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(5).svg" alt="Webdesign Icon" width="104" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Your Style, Your Logo</h2> </a> 
+                            <div class="col-4 col-lg-2">
+                                <a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(5).svg" alt="Webdesign Icon" width="104" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Your Style, Your Logo</h2> </a> 
                             </div>                             
-                            <div class="col-4 col-lg-2"><a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(2).svg" alt="Webdesign Icon" width="60" height="60"> <h2 class="fw-normal h6 mb-1 text-black-50">Stress-Free Support</h2></a> 
+                            <div class="col-4 col-lg-2">
+                                <a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(2).svg" alt="Webdesign Icon" width="60" height="60"> <h2 class="fw-normal h6 mb-1 text-black-50">Stress-Free Support</h2></a> 
                             </div>                             
-                            <div class="col-4 col-lg-2"><a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(3).svg" alt="Webdesign Icon" width="60" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Ask Us Anything</h2> </a> 
+                            <div class="col-4 col-lg-2">
+                                <a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(3).svg" alt="Webdesign Icon" width="60" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Ask Us Anything</h2> </a> 
                             </div>                             
-                            <div class="col-4 col-lg-2"><a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(4).svg" alt="Webdesign Icon" width="60" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Increase Visibility</h2> </a> 
+                            <div class="col-4 col-lg-2">
+                                <a class="bg-white d-block link-primary pb-4 pe-3 ps-3 pt-4 text-decoration-none" href="#"> <img src="assets/icons/obraz(4).svg" alt="Webdesign Icon" width="60" height="60"><h2 class="fw-normal h6 mb-1 text-black-50">Increase Visibility</h2> </a> 
                             </div>                             
                         </div>                         
                     </div>                     
@@ -251,7 +260,8 @@ Join the forge. Create the future.</p>
                             <div class="portfolio-tile">
                                 <img src="Design/logo%20ob.png" class="img-fluid w-100 bg-white" alt="Pitbull89 logo" width="320" height="400">
                                 <div class="overlay">
-                                    <h3>Pitbull89</h3><a href="https://martynforge.com/pitbull89" class="mf-btn mf-btn-primary" role="button" aria-label="View project Pitbull89">View Project</a>
+                                    <h3>Pitbull89</h3>
+                                    <a href="https://martynforge.com/pitbull89" class="mf-btn mf-btn-primary" role="button" aria-label="View project Pitbull89">View Project</a>
                                 </div>
                             </div>
                         </div>
@@ -259,7 +269,8 @@ Join the forge. Create the future.</p>
                             <div class="portfolio-tile">
                                 <img src="Design/skorupex.png" class="img-fluid w-100 bg-white" alt="Skorupex logo" width="320" height="400">
                                 <div class="overlay">
-                                    <h3>Skorupex</h3><a href="https://martynforge.com/skorupex" class="mf-btn mf-btn-primary" role="button" aria-label="View project Skorupex">View Project</a>
+                                    <h3>Skorupex</h3>
+                                    <a href="https://martynforge.com/skorupex" class="mf-btn mf-btn-primary" role="button" aria-label="View project Skorupex">View Project</a>
                                 </div>
                             </div>
                         </div>
@@ -267,12 +278,14 @@ Join the forge. Create the future.</p>
                             <div class="portfolio-tile">
                                 <img src="Design/jurado.png" class="img-fluid w-100 bg-white" alt="Jurado logo" width="320" height="400">
                                 <div class="overlay">
-                                    <h3>Jurado</h3><a href="https://martynforge.com/jurado" class="mf-btn mf-btn-primary" role="button" aria-label="View project Jurado">View Project</a>
+                                    <h3>Jurado</h3>
+                                    <a href="https://martynforge.com/jurado" class="mf-btn mf-btn-primary" role="button" aria-label="View project Jurado">View Project</a>
                                 </div>
                             </div>
                         </div>
                     </div>                     
-                    <div class="pb-3 pt-3 text-center"><a class="mf-btn mf-btn-primary" href="#" role="button" aria-label="View more portfolio">View More</a>
+                    <div class="pb-3 pt-3 text-center">
+                        <a class="mf-btn mf-btn-primary" href="#" role="button" aria-label="View more portfolio">View More</a>
                     </div>                     
                 </div>                 
             </section>             
@@ -290,25 +303,29 @@ Join the forge. Create the future.</p>
                         <div class="col-lg-4 col-md-6 pb-3 pt-3"> 
                             <div class="bg-light border d-flex flex-column h-100 p-4 rounded"> 
                                 <h4 class="text-dark mb-2">Technical Support</h4> 
-                                <p>Quick fixes, updates, server setup and troubleshooting for all your digital products. Never face a tech issue alone.</p><a href="#" class="mf-btn mf-btn-secondary" role="button" aria-label="Request technical help">Get Help</a>
+                                <p>Quick fixes, updates, server setup and troubleshooting for all your digital products. Never face a tech issue alone.</p>
+                                <a href="#" class="mf-btn mf-btn-secondary" role="button" aria-label="Request technical help">Get Help</a>
                             </div>                             
                         </div>                         
                         <!-- Creative Guidance -->                         
                         <div class="col-lg-4 col-md-6 pb-3 pt-3"> 
                             <div class="bg-light border d-flex flex-column h-100 p-4 rounded"> 
                                 <h4 class="text-dark mb-2">Creative Guidance</h4> 
-                                <p>Need advice on color schemes, UX flow or branding? Our design experts are here to elevate your vision.</p><a href="#" class="mf-btn mf-btn-secondary" role="button" aria-label="Ask a design question">Ask a Designer</a>
+                                <p>Need advice on color schemes, UX flow or branding? Our design experts are here to elevate your vision.</p>
+                                <a href="#" class="mf-btn mf-btn-secondary" role="button" aria-label="Ask a design question">Ask a Designer</a>
                             </div>                             
                         </div>                         
                         <!-- AI Integration -->                         
                         <div class="col-lg-4 col-md-6 pb-3 pt-3"> 
                             <div class="bg-light border d-flex flex-column h-100 p-4 rounded"> 
                                 <h4 class="text-dark mb-2">AI Integration</h4> 
-                                <p>Whether you're curious or committed, we help you implement AI into your workflows, tools or web content – step by step.</p><a href="#" class="mf-btn mf-btn-secondary" role="button" aria-label="Talk AI with our team">Talk AI with Us</a>
+                                <p>Whether you're curious or committed, we help you implement AI into your workflows, tools or web content – step by step.</p>
+                                <a href="#" class="mf-btn mf-btn-secondary" role="button" aria-label="Talk AI with our team">Talk AI with Us</a>
                             </div>                             
                         </div>                         
                     </div>                     
-                    <div class="pb-3 pt-4 text-center"><a class="mf-btn mf-btn-primary" href="#" role="button" aria-label="Explore support options">View More</a>
+                    <div class="pb-3 pt-4 text-center">
+                        <a class="mf-btn mf-btn-primary" href="#" role="button" aria-label="Explore support options">View More</a>
                     </div>                     
                 </div>                 
             </section>             
@@ -318,7 +335,8 @@ Join the forge. Create the future.</p>
                         <div class="col-lg-7 ms-auto me-auto"> 
                             <h2 class="text-dark">Let's create something meaningful</h2> 
                             <p class="mb-4">Have an idea, question, or project in mind? We’d love to hear from you.
-Whether you're starting from scratch or need a design refresh — we're here to help.</p><a class="mf-btn mf-btn-highlight" href="#" role="button" aria-label="Submit your listing">Add your listing</a>
+Whether you're starting from scratch or need a design refresh — we're here to help.</p>
+                            <a class="mf-btn mf-btn-highlight" href="#" role="button" aria-label="Submit your listing">Add your listing</a>
                         </div>                         
                     </div>                     
                 </div>                 
@@ -382,7 +400,8 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                     <div class="col-xl-4 py-3"> <a href="#" class="d-inline-block fw-bold h2 mb-4 text-decoration-none text-white">MartynForge</a> 
                         <p class="mb-3"> 
           Empowering creators and businesses through thoughtful design, modern tech, and AI-driven solutions. </p> 
-                        <div class="mb-4"><a href="mailto:info@martynforge.com" class="link-secondary text-decoration-none">info@martynforge.com</a> 
+                        <div class="mb-4">
+                            <a href="mailto:info@martynforge.com" class="link-secondary text-decoration-none">info@martynforge.com</a> 
                         </div>                         
                     </div>                     
                     <!-- NAVIGATION LINKS -->                     
@@ -440,14 +459,16 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                         <div class="col-md pb-2 pt-2"> 
                             <p class="mb-0">&copy; 2025 MartynForge. All rights reserved.</p> 
                         </div>                         
-                        <div class="col-md-auto pb-2 pt-2"><a href="/privacy.html" class="link-secondary text-decoration-none">Privacy Policy</a> | <a href="/terms.html" class="link-secondary text-decoration-none">Terms of Use</a> 
+                        <div class="col-md-auto pb-2 pt-2">
+                            <a href="/privacy.html" class="link-secondary text-decoration-none">Privacy Policy</a> | <a href="/terms.html" class="link-secondary text-decoration-none">Terms of Use</a> 
                         </div>                         
                     </div>                     
                 </div>                 
             </div>             
         </footer>
         <div id="ai-widget" class="ai-widget hidden">
-            <div class="ai-widget-header"><strong>Talk with Aurora</strong>
+            <div class="ai-widget-header">
+                <strong>Talk with Aurora</strong>
                 <button id="ai-close" aria-label="Close AI chat">×</button>
             </div>
             <div class="ai-widget-body" id="ai-chat">
@@ -461,5 +482,6 @@ Whether you're starting from scratch or need a design refresh — we're here to 
         <script src="assets/js/popper.min.js"></script>         
         <script src="bootstrap/js/bootstrap.min.js"></script>         
         <script src="assets/js/main.js"></script>
+        <script src="assets/js/aurora-chat.js"></script>
     </body>     
 </html>

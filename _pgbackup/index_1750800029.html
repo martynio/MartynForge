@@ -73,44 +73,39 @@
             </nav>             
         </header>         
         <main> 
-            <section id="Home" class="background-cover bg-dark  pb-5 position-relative pt-5 text-white" style="background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');"> 
-                <div class="container mt-5  pb-5 pt-5"> 
-                    <div class="pb-5 pt-5 row"> 
-                        <div class="col-lg-7 col-xl-6 col-xxl-5 pb-5 pt-5"> 
-                            <h1 class="display-3 fw-normal ">&quot;Incepta tua &mdash; forma nostra.&quot;</h1> 
-                            <p class="lead mb-5">Twoje pomysły &mdash; nasza forma.</p> 
-                            <form id="search-form"> 
-                                <div id="ai-entry" class="d-flex align-items-center justify-content-between rounded-pill shadow px-3 py-2 bg-white mx-auto mb-4" style="cursor:pointer; max-width: 500px; border: 2px solid #cc5500;">
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <img src="assets/icons/avatar-kuznia.svg" alt="Asystent Kuźni" width="28" height="28" class="me-2"><span class="text-muted" style="white-space: nowrap;">Zadaj pytanie...</span>
-                                    </div>
-                                    <button class="btn p-0 ms-2" id="aiOpenBtn" aria-label="Otwórz czat">
+            <section id="Home" class="background-cover bg-dark pb-5 position-relative pt-5 text-white" style="background-image:url('Design/ChatGPT%20Image%207%20maj%202025,%2022_40_53(1).png');">
+                <div class="container mt-5 pb-5 pt-5">
+                    <div class="pb-5 pt-5 row">
+                        <!-- LEWA kolumna: hasło + input + czat (mobile) -->
+                        <div class="col-lg-7 col-xl-6 col-xxl-5 pb-5 pt-5">
+                            <h1 class="display-3 fw-normal">"Incepta tua — forma nostra."</h1>
+                            <p class="lead mb-5">Twoje pomysły — nasza forma.</p>
+                            <!-- Wrapper z inputem -->
+                            <div id="ai-chat-wrapper" class="mx-auto mb-4" style="max-width: 500px;">
+                                <div class="d-flex align-items-center rounded-pill shadow px-3 py-2 bg-white" style="border: 2px solid #cc5500;">
+                                    <img src="assets/icons/avatar-kuznia.svg" alt="Asystent Kuźni" width="28" height="28" class="me-2">
+                                    <input type="text" id="aiInput" class="form-control border-0 shadow-none" placeholder="Zadaj pytanie…" style="flex: 1;">
+                                    <button id="aiSendBtn" class="btn p-0 ms-2" aria-label="Wyślij" style="background: none; border: none;">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#cc5500" width="24" height="24" viewBox="0 0 24 24">
                                             <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
                                         </svg>
                                     </button>
                                 </div>
-                                <!-- Aurora Mini: Dock czatu -->
-                                <div id="aiChatPanel" class="rounded shadow mt-3">
-                                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom" style="background: #ffe3cc;">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/icons/avatar-kuznia.svg" alt="Aurora" width="24" height="24" class="me-2"><strong>Asystent Kuźni</strong>
-                                        </div>
-                                        <button id="aiCloseBtn" class="btn-close" aria-label="Zamknij"></button>
-                                    </div>
-                                    <div id="aiChatBody" class="px-3 py-2" style="max-height: 260px; overflow-y: auto; font-size: 0.95rem; background: #fffdf7;">
-                                        <!-- Wiadomości będą generowane tutaj przez JS -->
-                                    </div>
-                                    <div class="px-3 py-2 border-top d-flex align-items-center" style="background: #fff8ee;">
-                                        <input type="text" id="aiChatInput" class="form-control form-control-sm me-2" placeholder="Zadaj pytanie...">
-                                        <button id="aiSendBtn" class="btn btn-sm" style="background: #cc5500; color: white;">⮞</button>
-                                    </div>
+                                <!-- czat mobilny -->
+                                <div id="ai-chat-below">
+                                    <div id="aiChatBodyMobile" class="chat-panel mobile px-2 py-3 mt-2"></div>
                                 </div>
-                            </form>
-                        </div>                         
-                    </div>                     
-                </div>                 
-            </section>             
+                            </div>
+                        </div>
+                        <!-- PRAWA kolumna: czat desktop -->
+                        <div class="col-lg-5 col-xl-6 col-xxl-7 pb-5 pt-5 d-none d-lg-block">
+                            <div class="mx-auto" style="max-width: 500px;">
+                                <div id="aiChatBodyDesktop" class="chat-panel desktop px-2 py-3 mt-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section class="mt-n5 pb-3 position-relative text-center" style="margin-top: -4rem;"> 
                 <div class="container "> 
                     <div class="bg-white p-3 rounded-3 shadow-sm"> 
@@ -378,7 +373,7 @@ Whether you're starting from scratch or need a design refresh — we're here to 
                         </div>                         
                     </div>                     
                 </div>                 
-            </section>             
+            </section>
         </main>         
         <footer class="bg-dark pt-5 text-secondary"> 
             <div class="container"> 
