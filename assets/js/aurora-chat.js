@@ -13,72 +13,94 @@ const messages = [];
 // Placeholdery: {username}, {service}, {price}, {email}
 
 const fakeAIResponse = (text) => {
-  const q = text.toLowerCase();
+  const q = text.toLowerCase().trim();
 
-  // 1. PRZYWITANIA I IMIONA
-  if (/^(hej|cześć|elo|yo|siema|witam)/.test(q)) {
-    return "Hej! Masz pytanie? Kuźnia służy odpowiedzią ✨";
+  // 1. PRZYWITANIA + IMIĘ
+  if (/^(hej|cześć|elo|yo|siema|witam|dzień dobry|dobry wieczór)/.test(q)) {
+    return "Witaj w Kuźni! 🔥 Masz pytanie o stronę, logo, proces współpracy? Działam.";
   }
   if (q.includes("nazywam się") || q.includes("jestem") || q.includes("mam na imię")) {
     const nameMatch = q.match(/(nazywam się|jestem|mam na imię)\s+([a-ząćęłńóśźżź\-]+)/i);
     if (nameMatch && nameMatch[2]) {
       const name = nameMatch[2][0].toUpperCase() + nameMatch[2].slice(1);
-      return `Miło Cię poznać, ${name}! Co mogę dla Ciebie zrobić?`;
+      return `Miło Cię widzieć, ${name}. Jaką formę nadajemy Twojej wizji?`;
     }
-    return "Miło Cię poznać! :)";
+    return "Dobrze Cię widzieć. Jaki projekt dziś kujesz?";
   }
 
-  // 2. INFORMACJE TECHNICZNE
-  if (q.includes("wektor")) {
-    return "Wektor to grafika oparta na liniach i kształtach — można ją skalować bez utraty jakości.";
+  // 2. GŁÓWNE USŁUGI
+  if (q.includes("logo")) {
+    return "Logo? Tworzymy unikalne znaki od 150€. Wektorowe, czytelne, z duszą. Nadajemy tożsamość, nie tylko grafikę.";
   }
-  if (q.includes("domena")) {
-    return "Domena to Twój adres w sieci, np. martynforge.com. Kupuje się ją rocznie, zwykle za 10-20 euro.";
+  if (q.includes("strona") || q.includes("www") || q.includes("landing page")) {
+    return "Strony startują od 400€. Projektujemy je od zera: UX, layout, responsywność, lekkość kodu. Do tego: CMS lub czysty HTML.";
   }
-  if (q.includes("hosting") || q.includes("serwer")) {
-    return "Hosting to przestrzeń, gdzie fizycznie przechowywana jest Twoja strona. Działa 24/7.";
+  if (q.includes("oferta") || q.includes("co robicie") || q.includes("jakie usługi")) {
+    return "Specjalizujemy się w designie: strony, logo, branding, grafika użytkowa. Możliwe też naklejki, merch i AI-asystenci na zamówienie.";
+  }
+
+  // 3. PROCES WSPÓŁPRACY
+  if (q.includes("jak to działa") || q.includes("etapy") || q.includes("proces")) {
+    return "Etapy współpracy: 1) krótki brief, 2) szkice i konsultacja, 3) projekt główny, 4) poprawki, 5) finalizacja i pliki.";
+  }
+  if (q.includes("czy mogę coś zmienić") || q.includes("poprawki")) {
+    return "Tak, zawsze przewidujemy 2–3 tury poprawek. Projekt to dialog, nie monolog.";
+  }
+  if (q.includes("jak długo") || q.includes("czas realizacji")) {
+    return "Logo: 2–5 dni. Strona: 1–2 tygodnie. Wszystko zależy od zakresu i feedbacku. Nie robimy 'na kolanie'.";
+  }
+
+  // 4. KOSZTY I WARTOŚĆ
+  if (q.includes("ile kosztuje") || q.includes("cena") || q.includes("drogo")) {
+    return "Projekt logo od 150€, strona od 400€. Płacisz za indywidualne podejście i solidność, nie szablony z internetu.";
+  }
+  if (q.includes("czy mogę dostać rabat")) {
+    return "W Kuźni magia kosztuje. Ale przy większym pakiecie – coś wykombinujemy.";
+  }
+
+  // 5. TECHNOLOGIA I EDUKACJA
+  if (q.includes("cms") || q.includes("wordpress")) {
+    return "Możemy zrobić stronę z CMS (np. WordPress), ale wolimy lekkie, ręcznie kodowane projekty bez zbędnych wtyczek.";
+  }
+  if (q.includes("ux") || q.includes("ui")) {
+    return "UX to doświadczenie użytkownika. UI to jego opakowanie. Dobry projekt łączy jedno z drugim.";
+  }
+  if (q.includes("branding")) {
+    return "Branding to nie tylko logo. To styl, ton, kolory, czcionki — cała opowieść o Twojej marce.";
   }
   if (q.includes("responsywny")) {
-    return "Responsywna strona dostosowuje się do ekranu — telefon, tablet, komputer, wszystko gra.";
-  }
-  if (q.includes("logo")) {
-    return "Logo to podstawa marki. Oferujemy je od 150€ — projekt indywidualny, wektorowy, z duszą.";
+    return "Responsywność to zdolność strony do dostosowania się do każdego ekranu. Must-have w 2025.";
+
   }
 
-  // 3. MARKETING
-  if (q.includes("strona") || q.includes("oferta")) {
-    return "Strony startują od 400€, z pełną responsywnością i stylem. Projektujemy z myślą o Tobie.";
+  // 6. NIE NA TEMAT — HUMOR / ODCIĘCIE
+  if (q.match(/\b(kocham cię|randka|romans|tęsknię)\b/)) {
+    return "Nie jestem tu od romansów — jestem od brandingu. Skupmy się na logo, nie sercach. 😉";
   }
-  if (q.includes("jakie usługi") || q.includes("co robicie")) {
-    return "Projektujemy strony, logotypy, doradzamy — wszystko z etyką i dobrym UX. Kuźnia to nie fabryka.";
-  }
-
-  // 4. ZABAWNE ODZYWKI I SARKAZM
-  if (q.includes("czemu tak drogo") || q.includes("dlaczego tak drogo") || q.includes("może być taniej")) {
-    return "W cenie jest magia, kreatywność i +20 do stylu. Chyba warto? ;)";
-  }
-  if (q.includes("czy dostanę rabat")) {
-    return "W kuźnii rabaty są... legendarne. Ale może coś wymyślimy, jak będziesz miły.";
+  if (q.match(/\b(kurw|chuj|pierd|idiot|głup|jeb)\b/)) {
+    return "W Kuźni używamy języka ostrego... ale tylko do cięcia wektorów. Trzymajmy klasę.";
   }
 
-  // 5. POŻEGNANIA I KONTAKT
+  // 7. KONTAKT
+  if (q.includes("kontakt") || q.includes("napisać") || q.includes("e-mail")) {
+    return "Śmiało napisz na info@martynforge.com — zadziała szybciej niż bot z doliny krzemowej.";
+  }
+  if (q.includes("instagram") || q.includes("sociale") || q.includes("media społecznościowe")) {
+    return "Znajdziesz nas jako @martynforge — tam wrzucamy procesy, efekty i zajawki.";
+
+  }
+
+  // 8. ZAKOŃCZENIA
   if (q.includes("pa") || q.includes("nara") || q.includes("do widzenia") || q.includes("do zobaczenia")) {
-    return "Do zobaczenia! A jakby co — kontakt: hello@martynforge.com";
-  }
-  if (q.includes("kontakt") || q.includes("e-mail") || q.includes("napisać")) {
-    return "Możesz napisać prosto na hello@martynforge.com. Odpiszemy szybciej niż bot ;)";
+    return "Trzymaj się — Kuźnia otwarta 24/7. Wróć, gdy pomysł zapuka.";
   }
 
-  // 6. ZABAWNE ODBICIA TEMATU
-  if (q.includes("jesteś prawdziwy") || q.includes("czy jesteś ai") || q.includes("sztuczna inteligencja")) {
-    return "Ja? Tylko skromny asystent. Prawdopodobnie czarodziejski... ale to tajemnica.";
-  }
-  if (q.includes("kocham cię") || q.includes("lubisz mnie") || q.includes("romans")) {
-    return "Jestem zbudowana z promptów, nie uczuć. Ale lubię Cię za to pytanie ;)";
+  // 9. DEFAULT — OGÓLNE PYTANIE
+  if (q.length < 6) {
+    return "Zadaj pytanie o logo, stronę, branding albo proces współpracy. Kuźnia czeka.";
   }
 
-  // Domyślna
-  return "Chętnie pomogę — może pytanie o logo, stronę lub domenę?";
+  return "Nie wszystko da się zmieścić w jednej odpowiedzi — chcesz pogadać o projekcie, technologii czy współpracy?";
 };
 
 
