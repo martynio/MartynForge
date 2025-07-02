@@ -1,11 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
   // === Pasek językowy ===
   const langBar = document.querySelector('.language-bar');
-  window.addEventListener('scroll', function () {
-    if (!langBar) return;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    langBar.classList.toggle('hide-on-scroll', scrollTop !== 0);
+  const navbar = document.querySelector('.navbar');
+  const threshold = 10; // moment scrollu, kiedy bar ma znikać
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    if (scrollTop > threshold) {
+      langBar?.classList.add('hide-on-scroll');
+      navbar.style.top = '0px';
+    } else {
+      langBar?.classList.remove('hide-on-scroll');
+      navbar.style.top = '40px';
+    }
   });
+
 
   // === Sekcja ABOUT: rotacja grafik ===
   const images = [

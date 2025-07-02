@@ -1,12 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
   // === Pasek językowy ===
-  const langBar = document.querySelector('.language-bar');
-  window.addEventListener('scroll', function () {
-    if (!langBar) return;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    langBar.classList.toggle('hide-on-scroll', scrollTop !== 0);
-  });
+   const langBar = document.querySelector('.language-bar');
+  const navbar = document.querySelector('.navbar');
+  const threshold = langBar ? langBar.offsetHeight : 40;
 
+  window.addEventListener('scroll', function () {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Ukryj językowy pasek (tylko wizualnie — nie zabiera layoutu)
+    if (langBar) {
+      langBar.classList.toggle('hide-on-scroll', scrollTop > 0);
+    }
+
+    // Przesuwaj navbar dynamicznie
+    if (scrollTop > threshold) {
+      navbar.style.top = "0";
+    } else {
+      navbar.style.top = threshold + "px";
+    }
+  });
   // === Sekcja ABOUT: rotacja grafik ===
   const images = [
     'assets/about/anvil1.png',
@@ -81,73 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
     btn.addEventListener('mouseleave', () => btn.style.transform = 'scale(1)');
   });
 
-// === Aurora Mini: czat ===
-const chatBody = document.getElementById("aiChatBody");
-const input = document.getElementById("aiInput");
-const sendBtn = document.getElementById("aiSendBtn");
-
-let chatInitialized = false;
-
-const fakeAIResponse = (text) => {
-  const q = text.toLowerCase();
-  if (q.includes("logo")) return "Logo zazwyczaj od 150€, zależnie od stylu.";
-  if (q.includes("strona")) return "Strony zaczynają się od 400€, z pełną responsywnością.";
-  return "Chętnie pomogę — napisz więcej!";
-};
-
-const addMessage = (text, sender = "user") => {
-  const message = document.createElement("div");
-  message.classList.add("chat-message", sender);
-
-  const avatar = document.createElement("img");
-  avatar.classList.add("avatar");
-  avatar.src = sender === "ai" ? "assets/icons/avatar-kuznia.svg" : "assets/icons/avatar-user.svg";
-  avatar.alt = sender === "ai" ? "AI" : "Ty";
-
-  const bubble = document.createElement("div");
-  bubble.classList.add("bubble");
-  bubble.textContent = text;
-
-  if (sender === "ai") {
-    message.appendChild(avatar);
-    message.appendChild(bubble);
-  } else {
-    message.appendChild(bubble);
-    message.appendChild(avatar);
-  }
-
-  chatBody.appendChild(message);
-  chatBody.scrollTop = chatBody.scrollHeight;
-};
-
-const sendMessage = () => {
-  const text = input.value.trim();
-  if (!text) return;
-
-  if (!chatInitialized) {
-    chatBody.style.display = "block";
-    chatBody.classList.add("visible"); // pokazywanie panelu po prawej
-    addMessage("W czym mogę pomóc?", "ai");
-    chatInitialized = true;
-  }
-
-  addMessage(text, "user");
-  input.value = "";
-
-  setTimeout(() => {
-    addMessage(fakeAIResponse(text), "ai");
-  }, 500);
-};
-
-if (sendBtn && input && chatBody) {
-  sendBtn.addEventListener("click", sendMessage);
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
-}
 
 
   // === Interaktywne kafelki usług ===
