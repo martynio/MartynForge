@@ -1,3 +1,20 @@
+/* Navbar */
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 40px;
+
+    /* wysokość language bar */
+    z-index: 999;
+    transition: top 0.3s ease-in-out;
+}
+
+body {
+    padding-top: 90px;
+
+    /* wysokość navbar + language bar */
+}
+
 /* Stylowanie paska językowego */
 .language-bar img {
     vertical-align: middle;
@@ -5,11 +22,21 @@
 
 /* Opcjonalnie: schowaj na małych ekranach */
 .language-bar {
-    transition: transform 0.3s ease;
+    //transition: transform 0.3s ease;
+      transition: all 0.3s ease;
+  z-index: 998;
+  background-color: rgba(255, 255, 255, 0.75);
+  height: auto;
+  padding: 0.5rem 0;
 }
 
 .language-bar.hide-on-scroll {
     transform: translateY(-100%);
+      opacity: 0;
+  height: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  border: none;
 }
 
 /* Naprawa z-index Pinegrow/Bootstrap */
@@ -154,21 +181,36 @@ header.fixed-top {
 }
 
 /* === Aurora Mini: Styl czatu === */
-#aiChatBody {
+.chat-panel {
     display: none;
-
-    /* ukryte przed pierwszym użyciem */
-    margin-top: 10px;
     max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     padding: 14px;
-    background: #fff8ee;
     border: 2px solid #cc5500;
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     max-height: 280px;
     overflow-y: auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    background: #fff;
+}
+
+.chat-panel.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* MOBILE (opcjonalnie lżejszy wygląd) */
+@media (max-width: 767px) {
+    .chat-panel {
+        border: none;
+        box-shadow: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 /* Wiadomości */
@@ -194,7 +236,7 @@ header.fixed-top {
     height: 32px;
     border-radius: 50%;
     flex-shrink: 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .bubble {
@@ -205,7 +247,7 @@ header.fixed-top {
     max-width: 75%;
     word-wrap: break-word;
     overflow-wrap: anywhere;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .chat-message.ai .bubble {
@@ -220,11 +262,7 @@ header.fixed-top {
     border-top-right-radius: 4px;
 }
 
-/* Pasek interaktywny (na górze) */
-#ai-entry {
-    transition: all 0.3s ease;
-}
-
+/* Input */
 #aiInput {
     border: none;
     outline: none;
@@ -232,23 +270,26 @@ header.fixed-top {
     font-size: 1rem;
 }
 
-/* === ANIMACJA PRZENIESIENIA CZATU === */
-@media (min-width: 992px) {
-    #ai-chat-wrapper.chat-animate {
-        animation: slideToRight 0.6s ease-in-out forwards;
-    }
+#aiInput::placeholder {
+    color: #999;
+    transition: color 0.3s ease;
+}
 
-    @keyframes slideToRight {
-        from {
-            transform: translateX(0);
-            opacity: 0;
-        }
+#aiInput:focus::placeholder {
+    color: transparent;
+}
 
-        to {
-            transform: translateX(120px);
-            opacity: 1;
-        }
-    }
+.chat-panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.chat-panel.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* === Service Cards: Interactivity & Visual === */
