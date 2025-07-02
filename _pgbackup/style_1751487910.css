@@ -1,3 +1,21 @@
+/* Navbar */
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 40px;
+    transition: top 0.4s ease;
+
+    /* wysokość language bar */
+    z-index: 999;
+    transition: top 0.3s ease-in-out;
+}
+
+body {
+    padding-top: 90px;
+
+    /* wysokość navbar + language bar */
+}
+
 /* Stylowanie paska językowego */
 .language-bar img {
     vertical-align: middle;
@@ -5,11 +23,21 @@
 
 /* Opcjonalnie: schowaj na małych ekranach */
 .language-bar {
-    transition: transform 0.3s ease;
+    //transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 998;
+    background-color: rgba(255, 255, 255, 0.75);
+    height: auto;
+    padding: 0.5rem 0;
 }
 
 .language-bar.hide-on-scroll {
     transform: translateY(-100%);
+    opacity: 0;
+    height: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    border: none;
 }
 
 /* Naprawa z-index Pinegrow/Bootstrap */
@@ -154,64 +182,115 @@ header.fixed-top {
 }
 
 /* === Aurora Mini: Styl czatu === */
-#ai-chat-wrapper {
+.chat-panel {
+    display: none;
     max-width: 500px;
     margin: 0 auto;
-    transition: transform 0.5s ease;
+    padding: 14px;
+    border: 2px solid #cc5500;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    max-height: 280px;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    background: #fff;
 }
 
-@media (min-width: 992px) {
-    #ai-chat-wrapper.shifted {
-        transform: translateX(200px);
+.chat-panel.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* MOBILE (opcjonalnie lżejszy wygląd) */
+@media (max-width: 767px) {
+    .chat-panel {
+        border: none;
+        box-shadow: none;
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
-#aiChatBody {
-    display: none;
-    background: #fffdf7;
-    border: 2px solid #cc5500;
-    border-radius: 16px;
-    max-height: 300px;
-    overflow-y: auto;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
+/* Wiadomości */
 .chat-message {
     display: flex;
+    align-items: flex-end;
     gap: 10px;
     margin-bottom: 12px;
 }
 
 .chat-message.ai {
     flex-direction: row;
+    justify-content: flex-start;
 }
 
 .chat-message.user {
     flex-direction: row-reverse;
+    justify-content: flex-end;
 }
 
 .chat-message .avatar {
     width: 32px;
     height: 32px;
     border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .bubble {
     padding: 10px 16px;
-    border-radius: 18px;
     font-size: 0.95rem;
+    line-height: 1.4;
+    border-radius: 18px;
     max-width: 75%;
     word-wrap: break-word;
+    overflow-wrap: anywhere;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .chat-message.ai .bubble {
-    background: #ffa726;
+    background-color: #ffa726;
     color: white;
+    border-top-left-radius: 4px;
 }
 
 .chat-message.user .bubble {
-    background: white;
+    background-color: #ffffff;
     color: #333;
+    border-top-right-radius: 4px;
+}
+
+/* Input */
+#aiInput {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1rem;
+}
+
+#aiInput::placeholder {
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+#aiInput:focus::placeholder {
+    color: transparent;
+}
+
+.chat-panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.chat-panel.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* === Service Cards: Interactivity & Visual === */
