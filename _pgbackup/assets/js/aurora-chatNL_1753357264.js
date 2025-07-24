@@ -17,90 +17,88 @@ const fakeAIResponse = (text) => {
 
   // 1. PRZYWITANIA + IMIĘ
   if (/^(hej|cześć|elo|yo|siema|witam|dzień dobry|dobry wieczór)/.test(q)) {
-    return "Witaj w Kuźni! 🔥 Masz pytanie o stronę, logo, proces współpracy? Działam.";
+    return "Welkom bij de Smidse! 🔥 Heb je een vraag over een website, logo of samenwerking? Ik ben er.";
   }
   if (q.includes("nazywam się") || q.includes("jestem") || q.includes("mam na imię")) {
     const nameMatch = q.match(/(nazywam się|jestem|mam na imię)\s+([a-ząćęłńóśźżź\-]+)/i);
     if (nameMatch && nameMatch[2]) {
       const name = nameMatch[2][0].toUpperCase() + nameMatch[2].slice(1);
-      return `Miło Cię widzieć, ${name}. Jaką formę nadajemy Twojej wizji?`;
+      return `Leuk je te zien, ${name}. Welke vorm geven we aan jouw visie?`;
     }
-    return "Dobrze Cię widzieć. Jaki projekt dziś kujesz?";
+    return "Fijn je te zien. Welk project smeed je vandaag?";
   }
 
   // 2. GŁÓWNE USŁUGI
   if (q.includes("logo")) {
-    return "Logo? Tworzymy unikalne znaki od 150€. Wektorowe, czytelne, z duszą. Nadajemy tożsamość, nie tylko grafikę.";
+    return "Logo? Wij maken unieke tekens vanaf 150€. Vector, leesbaar, met ziel. We geven identiteit, geen plaatje.";
   }
   if (q.includes("strona") || q.includes("www") || q.includes("landing page")) {
-    return "Strony startują od 400€. Projektujemy je od zera: UX, layout, responsywność, lekkość kodu. Do tego: CMS lub czysty HTML.";
+    return "Websites vanaf 400€. Ontwerp van nul: UX, layout, responsive, lichte code. Met CMS of puur HTML.";
   }
   if (q.includes("oferta") || q.includes("co robicie") || q.includes("jakie usługi")) {
-    return "Specjalizujemy się w designie: strony, logo, branding, grafika użytkowa. Możliwe też naklejki, merch i AI-asystenci na zamówienie.";
+    return "Wij zijn gespecialiseerd in design: websites, logo’s, branding, gebruiksgrafiek. Ook stickers, merch en AI-assistenten op aanvraag.";
   }
 
   // 3. PROCES WSPÓŁPRACY
   if (q.includes("jak to działa") || q.includes("etapy") || q.includes("proces")) {
-    return "Etapy współpracy: 1) krótki brief, 2) szkice i konsultacja, 3) projekt główny, 4) poprawki, 5) finalizacja i pliki.";
+    return "Samenwerkingsproces: 1) korte briefing, 2) schets en overleg, 3) hoofdontwerp, 4) correcties, 5) afronding en bestanden.";
   }
   if (q.includes("czy mogę coś zmienić") || q.includes("poprawki")) {
-    return "Tak, zawsze przewidujemy 2–3 tury poprawek. Projekt to dialog, nie monolog.";
+    return "Ja, we voorzien altijd 2–3 correctierondes. Ontwerp is dialoog, geen monoloog.";
   }
   if (q.includes("jak długo") || q.includes("czas realizacji")) {
-    return "Logo: 2–5 dni. Strona: 1–2 tygodnie. Wszystko zależy od zakresu i feedbacku. Nie robimy 'na kolanie'.";
+    return "Logo: 2–5 dagen. Website: 1–2 weken. Afhankelijk van scope en feedback. Geen haastwerk.";
+
   }
 
   // 4. KOSZTY I WARTOŚĆ
   if (q.includes("ile kosztuje") || q.includes("cena") || q.includes("drogo")) {
-    return "Projekt logo od 150€, strona od 400€. Płacisz za indywidualne podejście i solidność, nie szablony z internetu.";
+    return "Logo vanaf 150€, website vanaf 400€. Je betaalt voor maatwerk en betrouwbaarheid, niet voor standaard sjablonen.";
   }
   if (q.includes("czy mogę dostać rabat")) {
-    return "W Kuźni magia kosztuje. Ale przy większym pakiecie – coś wykombinujemy.";
+    return "In de Smidse kost magie wat. Maar bij een groter pakket – valt er iets te regelen.";
   }
 
   // 5. TECHNOLOGIA I EDUKACJA
   if (q.includes("cms") || q.includes("wordpress")) {
-    return "Możemy zrobić stronę z CMS (np. WordPress), ale wolimy lekkie, ręcznie kodowane projekty bez zbędnych wtyczek.";
+    return "We kunnen een CMS-site bouwen (zoals WordPress), maar geven de voorkeur aan lichte, handgecodeerde projecten zonder overbodige plugins.";
   }
   if (q.includes("ux") || q.includes("ui")) {
-    return "UX to doświadczenie użytkownika. UI to jego opakowanie. Dobry projekt łączy jedno z drugim.";
+    return "UX is gebruikerservaring. UI is de verpakking. Een goed ontwerp verbindt beide.";
   }
   if (q.includes("branding")) {
-    return "Branding to nie tylko logo. To styl, ton, kolory, czcionki — cała opowieść o Twojej marce.";
+    return "Branding is meer dan een logo. Het is stijl, toon, kleuren, lettertypes — het hele verhaal van jouw merk.";
   }
   if (q.includes("responsywny")) {
-    return "Responsywność to zdolność strony do dostosowania się do każdego ekranu. Must-have w 2025.";
-
+    return "Responsiviteit betekent dat een site zich aanpast aan elk scherm. Onmisbaar in 2025.";
   }
 
   // 6. NIE NA TEMAT — HUMOR / ODCIĘCIE
   if (q.match(/\b(kocham cię|randka|romans|tęsknię)\b/)) {
-    return "Nie jestem tu od romansów — jestem od brandingu. Skupmy się na logo, nie sercach. 😉";
+    return "Ik ben er niet voor romantiek — ik ben er voor branding. Laten we focussen op je logo, niet je hart. 😉";
   }
   if (q.match(/\b(kurw|chuj|pierd|idiot|głup|jeb)\b/)) {
-    return "W Kuźni używamy języka ostrego... ale tylko do cięcia wektorów. Trzymajmy klasę.";
+    return "In de Smidse gebruiken we scherp taalgebruik... maar alleen voor vector-snedes. Laten we stijl houden.";
   }
 
   // 7. KONTAKT
   if (q.includes("kontakt") || q.includes("napisać") || q.includes("e-mail")) {
-    return "Śmiało napisz na info@martynforge.com — zadziała szybciej niż bot z doliny krzemowej.";
+    return "Mail gerust naar info@martynforge.com — dat werkt sneller dan een bot uit Silicon Valley.";
   }
   if (q.includes("instagram") || q.includes("sociale") || q.includes("media społecznościowe")) {
-    return "Znajdziesz nas jako @martynforge — tam wrzucamy procesy, efekty i zajawki.";
-
+    return "Je vindt ons als @martynforge — daar delen we processen, resultaten en inspiratie.";
   }
 
   // 8. ZAKOŃCZENIA
   if (q.includes("pa") || q.includes("nara") || q.includes("do widzenia") || q.includes("do zobaczenia")) {
-    return "Trzymaj się — Kuźnia otwarta 24/7. Wróć, gdy pomysł zapuka.";
+    return "Tot ziens — de Smidse is 24/7 open. Kom terug als het idee roept.";
   }
 
   // 9. DEFAULT — OGÓLNE PYTANIE
   if (q.length < 6) {
-    return "Zadaj pytanie o logo, stronę, branding albo proces współpracy. Kuźnia czeka.";
+    return "Stel een vraag over logo, website, branding of het proces. De Smidse wacht.";
   }
-
-  return "Nie wszystko da się zmieścić w jednej odpowiedzi — chcesz pogadać o projekcie, technologii czy współpracy?";
+  return "Niet alles past in één antwoord — wil je praten over je project, technologie of samenwerking?";
 };
 
 
@@ -142,7 +140,7 @@ const renderMessages = () => {
       const avatar = document.createElement("img");
       avatar.classList.add("avatar");
       avatar.src = sender === "ai" ? "assets/icons/avatar-kuznia.svg" : "assets/icons/avatar-user.svg";
-      avatar.alt = sender === "ai" ? "AI" : "Ty";
+      avatar.alt = sender === "ai" ? "AI" : "Jij";
 
       const bubble = document.createElement("div");
       bubble.classList.add("bubble");
@@ -166,17 +164,17 @@ const activateChat = () => {
   if (chatActivated) return;
   chatActivated = true;
 
-  // Pokaż panele
+  // Toon panelen
   [mobileChat, desktopChat].forEach(panel => {
     if (panel) panel.classList.add("visible");
   });
 
-  // Dodaj typing dots
+  // Voeg typindicator toe
   addTypingIndicator();
 
   setTimeout(() => {
     removeTypingIndicator();
-    messages.push({ text: "W czym mogę pomóc?", sender: "ai" });
+    messages.push({ text: "Waarmee kan ik je helpen?", sender: "ai" });
     chatInitialized = true;
     renderMessages();
   }, 1200);
@@ -209,11 +207,3 @@ if (sendBtn && input) {
 
   input.addEventListener("focus", activateChat);
 }
-document.querySelectorAll('.navbar-collapse .nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    const navbarCollapse = document.querySelector('.navbar-collapse');
-    if (navbarCollapse.classList.contains('show')) {
-      new bootstrap.Collapse(navbarCollapse).hide();
-    }
-  });
-});
