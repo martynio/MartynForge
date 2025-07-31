@@ -20,11 +20,11 @@ const fakeAIResponse = (text) => {
     return "Witaj w Kuźni! 🔥 Masz pytanie o stronę, logo, proces współpracy? Działam.";
   }
   if (q.includes("nazywam się") || q.includes("jestem") || q.includes("mam na imię")) {
-    const nameMatch = q.match(/(nazywam się|jestem|mam na imię)\s+([a-ząćęłńóśźżź\-]+)/i);
-    if (nameMatch && nameMatch[2]) {
-      const name = nameMatch[2][0].toUpperCase() + nameMatch[2].slice(1);
-      return `Miło Cię widzieć, ${name}. Jaką formę nadajemy Twojej wizji?`;
-    }
+const nameMatch = q.match(/(nazywam się|jestem|mam na imię)\s+([a-ząćęłńóśźżź\- ]+)/i);
+if (nameMatch && nameMatch[2]) {
+  const name = nameMatch[2].trim().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  return `Miło Cię widzieć, ${name}. Jaką formę nadajemy Twojej wizji?`;
+}
     return "Dobrze Cię widzieć. Jaki projekt dziś kujesz?";
   }
 
